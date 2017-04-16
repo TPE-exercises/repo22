@@ -5,3 +5,4 @@ Auch über mehrere Semester hinweg kommt es nicht zu Kollisionen mit anderen
 Gruppen.
 Durch die Eindeutigkeit der Unterkategorien Vorlesung, Semester, Gruppe und
 Übungsblatt kommt es zu keinen Kollisionen.
+Edit: Durch Spezifizierungen von Ort, Zeit, gewählter Namen kommt es zu dieser Eindeutigkeit.
