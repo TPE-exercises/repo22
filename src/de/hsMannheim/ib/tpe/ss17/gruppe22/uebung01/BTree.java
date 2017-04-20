@@ -191,7 +191,8 @@ public class BTree {
 	}
 
 	/**
-	 * Prints out the first level, then the second one and so on.
+	 * Prints out the first level, then the second one and so on. However, there is no indication
+	 * of when a new level starts.
 	 */
 	public void printLevelorder() {
 		Queue nodeQueue = new Queue(size());
