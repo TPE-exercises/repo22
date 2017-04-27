@@ -61,7 +61,7 @@ public class CrypterCaesar implements Crypter {
 	/**
 	 * Encrypts a string by Caesar standard and the key charShift.
 	 * 
-	 * 
+	 * @param message: The message to be encryped
 	 */
 	public String encrypt(String message) {
 		int messageLength = message.length();
@@ -79,12 +79,13 @@ public class CrypterCaesar implements Crypter {
 	/**
 	 * Decrypts a string by Caesar standard and the key charShift.
 	 * 
-	 * @param cypherText: the message to be decrypted
+	 * @param cypherText:
+	 *            the message to be decrypted
 	 */
 	public String decrypt(String cypherText) {
 		int textLength = cypherText.length();
 		String decryptedText = "";
-		setCharShift(26 - charShift);
+		setCharShift(this.alphabet.length - charShift);
 		for (int i = 0; i < textLength; i++) {
 			if (isInAlphabet(cypherText.charAt(i))) {
 				decryptedText = decryptedText + shiftedLetter(cypherText.charAt(i));
@@ -92,7 +93,7 @@ public class CrypterCaesar implements Crypter {
 				decryptedText = decryptedText + cypherText.charAt(i);
 			}
 		}
-		setCharShift(26 - charShift);
+		setCharShift(this.alphabet.length - charShift);
 		return decryptedText;
 	}
 
