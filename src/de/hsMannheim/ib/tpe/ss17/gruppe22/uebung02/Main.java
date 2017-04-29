@@ -5,7 +5,9 @@ public class Main {
 
 	  public static void main(String[] args) {
 	    // TODO Auto-generated method stub
-	    Crypter myCrypter = new CrypterCaesar((26*3000)*(-1)+1);
+		CrypterCaesar myCaesarCrypter = new CrypterCaesar(1);
+		CrypterReverse myCrypterReverse = new CrypterReverse();
+	    Crypter myCrypter = myCaesarCrypter;
 //	    String myString = "aBc";
 	    String myString = "Ich, Julius Caesar, sagte den folgenden beruehmten Satz: Veni, vidi, vici.";
 	    
@@ -22,7 +24,7 @@ public class Main {
 	    System.out.println();
 	    
 	    // Task 1c)
-	    myCrypter = new CrypterReverse();
+	    myCrypter = myCrypterReverse;
 	    System.out.println("Reverse-Verschlüsselung:");
 	    System.out.println();
 	    myEncryptedString = myCrypter.encrypt(myString);
@@ -33,6 +35,14 @@ public class Main {
 	    System.out.println(myDecryptedString);
 	    System.out.println();
 	    System.out.println();
+	    
+	    // Task 1d)
+	    myString = "XHMSNYYXYJQQJS";
+	    myString = myCrypterReverse.decrypt(myString);
+	    myCaesarCrypter.setCharShift(5);
+	    myString = myCaesarCrypter.decrypt(myString);
+	    myString = myCrypterReverse.decrypt(myString);
+	    System.out.println(myString);
 	  }
 
 	}
