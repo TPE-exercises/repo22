@@ -7,26 +7,26 @@ public class ShakerSort {
 	public static int swap = 0;
 	public static int compare = 0;
 
-	static void swap(int[] arrayOfNumbers, int i, int j) {
+	static void swap(Comparable[] array, int i, int j) {
 		// swapping i and j
-		int t = arrayOfNumbers[i];
-		arrayOfNumbers[i] = arrayOfNumbers[j];
-		arrayOfNumbers[j] = t;
+		Comparable t = array[i];
+		array[i] = array[j];
+		array[j] = t;
 	}
 
-	static void shakerSort(int[] arrayOfNumbers) {
+	static void shakerSort(Comparable[] array) {
 		boolean swapped;
-		int[] markers = new int[arrayOfNumbers.length];
+		int[] markers = new int[array.length];
 		do {
 			// resets markers
-			for (int g = 0; g < arrayOfNumbers.length; g++) {
+			for (int g = 0; g < array.length; g++) {
 				markers[g] = 0;
 			}
 			swapped = false;
 			int i;
-			for (i = 0; i < arrayOfNumbers.length - 1; i++) {
-				if (arrayOfNumbers[i] > arrayOfNumbers[i + 1]) {
-					swap(arrayOfNumbers, i, i + 1);
+			for (i = 0; i < array.length - 1; i++) {
+				if (array[i].compareTo(array[i + 1]) == 1) {
+					swap(array, i, i + 1);
 					// marks swapped elements
 					markers[i] = 1;
 					markers[i + 1] = 1;
@@ -37,11 +37,11 @@ public class ShakerSort {
 			}
 
 			// prints the array with markers and resets markers
-			for (int g = 0; g < arrayOfNumbers.length; g++) {
+			for (int g = 0; g < array.length; g++) {
 				if (markers[g] == 1)
-					print(arrayOfNumbers[g] + "*, ");
+					print(array[g] + "*, ");
 				else
-					print(arrayOfNumbers[g] + ", ");
+					print(array[g] + ", ");
 				markers[g] = 0;
 			}
 			println();
@@ -50,8 +50,8 @@ public class ShakerSort {
 				i--;
 				// direction is changing (going back)
 				for (; i >= 0; i--) {
-					if (arrayOfNumbers[i] > arrayOfNumbers[i + 1]) {
-						swap(arrayOfNumbers, i, i + 1);
+					if (array[i].compareTo(array[i + 1]) == 1) {
+						swap(array, i, i + 1);
 						// marks swapped elements
 						markers[i] = 1;
 						markers[i + 1] = 1;
@@ -61,11 +61,11 @@ public class ShakerSort {
 					compare++;
 				}
 				// prints the array with markers
-				for (int g = 0; g < arrayOfNumbers.length; g++) {
+				for (int g = 0; g < array.length; g++) {
 					if (markers[g] == 1)
-						print(arrayOfNumbers[g] + "*, ");
+						print(array[g] + "*, ");
 					else
-						print(arrayOfNumbers[g] + ", ");
+						print(array[g] + ", ");
 				}
 				println();
 			}
@@ -74,15 +74,28 @@ public class ShakerSort {
 
 	public static void main(String[] args) {
 
-		int[] arrayOfNumbers = new int[2];
+		Comparable[] array = new Comparable[9];
+		//Only MyInts
+//		array[0] = new MyInt(5);
+//		array[1] = new MyInt(2);
+		
+		// Only MyStrings
+//		array[0] = new MyString("Paulus");
+//		array[1] = new MyString("Anna");
 
-		for (int i = 0; i < arrayOfNumbers.length; i++) {
-			arrayOfNumbers[i] = (int) Math.floor(Math.random() * 100 + 1);
-		}
-		for (int j = 0; j < arrayOfNumbers.length; j++)
-			print(arrayOfNumbers[j] + ", ");
+		array[0] = new MyString("Quacker");
+		array[1] = new MyInt(72);
+		array[2] = new MyInt(-1);
+		array[3] = new MyString("Duck");
+		array[4] = new MyString("Ben");
+		array[5] = new MyString("zeugungsfähig");
+		array[6] = new MyString("Zutaten");
+		array[7] = new MyInt(20);
+		array[8] = new MyString("yopta");
+		for (int j = 0; j < array.length; j++)
+			print(array[j] + ", ");
 		println();
-		shakerSort(arrayOfNumbers);
+		shakerSort(array);
 		println();
 		println("Anzahl der Vergleiche: " + compare);
 		println("Anzahl der Vertauschungen: " + swap);
