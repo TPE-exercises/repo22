@@ -6,7 +6,7 @@ public class KoelnerEis extends Eis{
 	}
 
 	public void fuellen() {
-		System.out.print("Ich föll " + this.behaeltnis + " met " + this.art + "d'r Sorte ");
+		System.out.print("Ich fuell " + this.behaeltnis + " met " + this.art + "d'r Sorte ");
 		int i = 0;
 		while (this.sorten.length > i) {
 			if (this.sorten.length - 1 > i)

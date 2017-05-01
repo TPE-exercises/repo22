@@ -2,10 +2,10 @@ package de.hsMannheim.ib.tpe.ss17.gruppe22.uebung02;
 
 import static gdi.MakeItSimple.*;
 
-public class ShakerSort {
+public class ShakerSort implements Sortable {
 
-	public static int swap = 0;
-	public static int compare = 0;
+	private static int swap = 0;
+	private static int compare = 0;
 
 	static void swap(Comparable[] array, int i, int j) {
 		// swapping i and j
@@ -13,8 +13,21 @@ public class ShakerSort {
 		array[i] = array[j];
 		array[j] = t;
 	}
-
-	static void shakerSort(Comparable[] array) {
+	private void resetSwaps() {
+		this.swap = 0;
+	}
+	private void resetComparisons() {
+		this.compare = 0;
+	}
+	public int getSwaps() {
+		return this.swap;
+	}
+	public int getComparisons() {
+		return this.compare;
+	}
+	public void sortArray(Comparable[] array) {
+		resetSwaps();
+		resetComparisons();
 		boolean swapped;
 		int[] markers = new int[array.length];
 		do {
@@ -70,6 +83,8 @@ public class ShakerSort {
 				println();
 			}
 		} while (swapped);
+		println("Anzahl der Vergleiche: " + compare);
+		println("Anzahl der Vertauschungen: " + swap);
 	}
 
 	public static void main(String[] args) {
@@ -88,16 +103,14 @@ public class ShakerSort {
 		array[2] = new MyInt(-1);
 		array[3] = new MyString("Duck");
 		array[4] = new MyString("Ben");
-		array[5] = new MyString("zeugungsfähig");
+		array[5] = new MyString("zielgerichtet");
 		array[6] = new MyString("Zutaten");
 		array[7] = new MyInt(20);
 		array[8] = new MyString("yopta");
 		for (int j = 0; j < array.length; j++)
 			print(array[j] + ", ");
 		println();
-		shakerSort(array);
+		(new ShakerSort()).sortArray(array);
 		println();
-		println("Anzahl der Vergleiche: " + compare);
-		println("Anzahl der Vertauschungen: " + swap);
 	}
 }

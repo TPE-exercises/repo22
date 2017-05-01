@@ -10,7 +10,7 @@ public class MonnemerEis extends Eis{
 	}
 	
 	public void fuellen() {
-		System.out.print("Isch füll " + this.behaeltnis + " mit " + this.art + "da Sort ");
+		System.out.print("Isch fuell " + this.behaeltnis + " mit " + this.art + "da Sort ");
 		int i = 0;
 		while (this.sorten.length > i) {
 			if (this.sorten.length - 1 > i)

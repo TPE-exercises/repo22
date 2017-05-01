@@ -15,7 +15,7 @@ public class Main {
 				System.out.println("Mannheim:");
 				break;
 			case 2:
-				System.out.println("Köln:");
+				System.out.println("Koeln:");
 				break;
 			}
 			System.out.println();
@@ -45,12 +45,13 @@ public class Main {
 
 		CrypterCaesar myCaesarCrypter = new CrypterCaesar(1);
 		CrypterReverse myCrypterReverse = new CrypterReverse();
+		// Task 1b)
 	    Crypter myCrypter = myCaesarCrypter;
 //	    String myString = "aBc";
 	    String myString = "Ich, Julius Caesar, sagte den folgenden beruehmten Satz: Veni, vidi, vici.";
 	    
-	    // Task 1b)
-	    System.out.println("Caesar-Verschlüsselung:");
+	    
+	    System.out.println("Caesar-Verschluesselung:");
 	    System.out.println();
 	    String myEncryptedString = myCrypter.encrypt(myString);
 	    System.out.print("Encrypted Message: ");
@@ -63,7 +64,7 @@ public class Main {
 	    
 	    // Task 1c)
 	    myCrypter = myCrypterReverse;
-	    System.out.println("Reverse-Verschlüsselung:");
+	    System.out.println("Reverse-Verschluesselung:");
 	    System.out.println();
 	    myEncryptedString = myCrypter.encrypt(myString);
 	    System.out.print("Encrypted Message: ");
@@ -81,6 +82,20 @@ public class Main {
 	    myString = myCaesarCrypter.decrypt(myString);
 	    myString = myCrypterReverse.decrypt(myString);
 	    System.out.println(myString);
+	    System.out.println();
+	    
+	    // Task 2b).
+	    Comparable[] array = new Comparable[9];
+		array[0] = new MyString("Quacker");
+		array[1] = new MyInt(72);
+		array[2] = new MyInt(-1);
+		array[3] = new MyString("Duck");
+		array[4] = new MyString("Ben");
+		array[5] = new MyString("zielgerichtet");
+		array[6] = new MyString("Zutaten");
+		array[7] = new MyInt(20);
+		array[8] = new MyString("yopta");
+	    Sortable.sortArray((new ShakerSort()), array);
 	  }
 
 }
