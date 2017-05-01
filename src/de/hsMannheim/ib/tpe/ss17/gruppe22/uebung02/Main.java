@@ -2,8 +2,6 @@ package de.hsMannheim.ib.tpe.ss17.gruppe22.uebung02;
 
 
 public class Main {
-
-	  public static void main(String[] args) {
 		  
 	  	public static void showEisdiele() {
 		Eisdiele[] eisdiele = new Eisdiele[] { new StandardEisdiele(), new MonnemerEisdiele(), new KoelnerEisdiele() };
@@ -85,4 +83,4 @@ public class Main {
 	    System.out.println(myString);
 	  }
 
-	}
+}
