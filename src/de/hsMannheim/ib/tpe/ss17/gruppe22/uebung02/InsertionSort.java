@@ -1,103 +1,66 @@
 package de.hsMannheim.ib.tpe.ss17.gruppe22.uebung02;
 
-import static gdi.MakeItSimple.*;
+/**
+ *
+ * @author Marc, Marco
+ */
 
-public class InsertionSort {
+public class InsertionSort implements Sortable {
 
-	// counters of standard sequence search
-	public static int swapSeq = 0;
-	public static int compareSeq = 0;
-	// counters of binary sequence search
-	public static int swapBinary = 0;
-	public static int compareBinary = 0;
+    // counters of search
+    private static int swap = 0;
+    private static int compare = 0;
 
-	// Insertion Sort with seqSearch
-	static void insertionSort(int[] arrayOfNumbers) {
-		// goes through the whole array
-		for (int i = 1; i < arrayOfNumbers.length; i++) {
-			int j = i;
-			int marker = arrayOfNumbers[i];
-			while (j > 0 && arrayOfNumbers[j - 1] > marker) {
-				arrayOfNumbers[j] = arrayOfNumbers[j - 1];
-				j--;
-				compareSeq++;
-				swapSeq++;
-			}
-			arrayOfNumbers[j] = marker;
-			// add only if swapped
-			if (j != i)
-				swapSeq++;
-		}
-	}
+    // Insertion Sort with seqSearch
+    @Override
+    public void sortArray(Comparable[] array) {
+        swap = 0;
+        compare = 0;
 
-	static int binarySearchIt(int[] arrayOfNumbers, int key, int end) {
-		int start = 0;
-		while (start <= end) {
-			int mid = (start + end) / 2;
-			// If key is already in the middle
-			if (arrayOfNumbers[mid] == key) {
-				compareBinary++;
-				return mid;
-			} else if (key < arrayOfNumbers[mid])
-				// Search before the middle
-				end = mid - 1;
-			else
-				// Search after the middle
-				start = mid + 1;
-			// add 2 because comparison is made every time
-			compareBinary += 2;
-		}
-		return start;
-	}
+        // goes through the whole array
+        for (int i = 1; i < array.length; i++) {
+            int j = i;
+            Comparable marker = array[i];
+            while (j > 0 && array[j - 1].compareTo(marker) == 1) {
+                array[j] = array[j - 1];
+                j--;
+                compare++;
+                swap++;
+            }
 
-	static void insertionSortBinary(int[] arrayOfNumbers) {
-		for (int i = 1; i < arrayOfNumbers.length; i++) {
-			int j = i;
-			int marker = arrayOfNumbers[i];
-			// searches the index through binary search method
-			int insertAt = binarySearchIt(arrayOfNumbers, marker, j);
-			while (j > insertAt) {
-				arrayOfNumbers[j] = arrayOfNumbers[j - 1];
-				swapBinary++;
-				j--;
-			}
-			arrayOfNumbers[j] = marker;
-			swapBinary++;
-		}
-	}
+            array[j] = marker;
+            // add only if swapped
+            if (j != i) {
+                swap++;
+            }
+            for (Comparable array1 : array) {
+                System.out.print(array1 + ", ");
+            }
+            System.out.println();
+        }
+        System.out.println("Anzahl der Vergleiche in InsertionSort (standard) im Array der LÃ¤nge " + array.length + ": "
+                + compare);
+        System.out.println("Anzahl der Vertauschungen in InsertionSort (standard) im Array der LÃ¤nge " + array.length + ": "
+                + swap);
 
-	public static void main(String[] args) {
-		int arraySize = 1;
+    }
 
-		// 3 times -> 1024, 2048, 4096 (duplicates each time)
-		for (int f = 0; f < 3; f++) {
-			int[] arrayOfNumbers = new int[arraySize];
-			for (int i = 0; i < arraySize; i++) {
-				arrayOfNumbers[i] = (int) Math.floor(Math.random() * arraySize + 1);
-			}
-			int[] arrayOfNumbers2 = new int[arraySize];
-			for (int i = 0; i < arraySize; i++) {
-				arrayOfNumbers2[i] = arrayOfNumbers[i];
-			}
-			insertionSortBinary(arrayOfNumbers);
-			insertionSort(arrayOfNumbers2);
+    public static void main(String[] args) {
+        Comparable[] array = new Comparable[9];
+        array[0] = new MyString("Quacker");
+        array[1] = new MyInt(72);
+        array[2] = new MyInt(-1);
+        array[3] = new MyString("Duck");
+        array[4] = new MyString("Ben");
+        array[5] = new MyString("zielgerichtet");
+        array[6] = new MyString("Zutaten");
+        array[7] = new MyInt(20);
+        array[8] = new MyString("yopta");
+        (new InsertionSort()).sortArray(array);
 
-			println("Anzahl der Vertauschungen in InsertionSort (standard) im Array der Länge " + arraySize + ": "
-					+ swapSeq);
-			println("Anzahl der Vertauschungen in InsertionSort (binäre Suche) im Array der Länge " + arraySize + ": "
-					+ swapBinary);
-			println("Anzahl der Vergleiche in InsertionSort (standard) im Array der Länge " + arraySize + ": "
-					+ compareSeq);
-			println("Anzahl der Vergleiche in InsertionSort (binäre Suche) im Array der Länge " + arraySize + ": "
-					+ compareBinary);
-			println();
-			arraySize = 2 * arraySize;
-			// reseting all the values because of repeating
-			swapSeq = 0;
-			swapBinary = 0;
-			compareSeq = 0;
-			compareBinary = 0;
-		}
+        System.out.println();
+        // reseting all the values because of repeating
 
-	}
+    }
+
 }
