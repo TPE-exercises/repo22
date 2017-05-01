@@ -23,6 +23,7 @@ public class ShakerSort implements Sortable {
   public int getComparisons() {
     return this.compare;
   }
+  @Override
   public void sortArray(Comparable[] array) {
     resetSwaps();
     resetComparisons();

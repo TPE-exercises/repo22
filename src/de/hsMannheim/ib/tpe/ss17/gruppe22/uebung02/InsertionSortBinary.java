@@ -28,6 +28,7 @@ public class InsertionSortBinary implements Sortable {
         return start;
     }
 
+    @Override
     public void sortArray(Comparable[] array) {
         compare = 0;
         swap = 0;
