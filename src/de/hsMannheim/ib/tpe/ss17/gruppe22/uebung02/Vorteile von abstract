@@ -1,0 +1,5 @@
+Durch das abstrakt machen der Klassen Eis und Eisdiele, ist es nicht mehr möglich wie bisher Instanzen der Klassen zu erstellen.
+Stattdessen ist es notwendig weitere Klassen zu erstellen, die Eis/Eisdiele erweitern, um Objekte dieser Klassen zu erhalten. Dies ist 
+jedoch sehr einfach, da in den Oberklassen keine Methoden verändert werden müssen und auch Arrays (etc.) die bisher mit Objekten der 
+Oberklassen arbeiteten problemlos Objekte der Unterklassen verwenden können. Zudem wird es ermöglicht beliebig viele weitere Unterklassen
+zu erstellen, die Eis/Eisdiele in ihren Funktionen erweitern und verändern (overriding).
