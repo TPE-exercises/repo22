@@ -37,6 +37,20 @@ public class Main {
         }
     }
 
+    public static Comparable[] giveStandardArray() {
+        Comparable[] array = new Comparable[9];
+        array[0] = new MyString("Quacker");
+        array[1] = new MyInt(72);
+        array[2] = new MyInt(-1);
+        array[3] = new MyString("Duck");
+        array[4] = new MyString("Ben");
+        array[5] = new MyString("zielgerichtet");
+        array[6] = new MyString("Zutaten");
+        array[7] = new MyInt(20);
+        array[8] = new MyString("yopta");
+        return array;
+    }
+
     public static void main(String[] args) {
 
         System.out.println("Teil 1, Aufgabe 1 + 2:");
@@ -87,40 +101,17 @@ public class Main {
         System.out.println();
 
         // Task 2b)
-        Comparable[] array = new Comparable[9];
-        array[0] = new MyString("Quacker");
-        array[1] = new MyInt(72);
-        array[2] = new MyInt(-1);
-        array[3] = new MyString("Duck");
-        array[4] = new MyString("Ben");
-        array[5] = new MyString("zielgerichtet");
-        array[6] = new MyString("Zutaten");
-        array[7] = new MyInt(20);
-        array[8] = new MyString("yopta");
+
+        Comparable []array;
+        array = giveStandardArray();
         Sortable.sortArray((new ShakerSort()), array);
         System.out.println();
 
-        array[0] = new MyString("Quacker");
-        array[1] = new MyInt(72);
-        array[2] = new MyInt(-1);
-        array[3] = new MyString("Duck");
-        array[4] = new MyString("Ben");
-        array[5] = new MyString("zielgerichtet");
-        array[6] = new MyString("Zutaten");
-        array[7] = new MyInt(20);
-        array[8] = new MyString("yopta");
+        array = giveStandardArray();
         Sortable.sortArray((new InsertionSort()), array);
         System.out.println();
 
-        array[0] = new MyString("Quacker");
-        array[1] = new MyInt(72);
-        array[2] = new MyInt(-1);
-        array[3] = new MyString("Duck");
-        array[4] = new MyString("Ben");
-        array[5] = new MyString("zielgerichtet");
-        array[6] = new MyString("Zutaten");
-        array[7] = new MyInt(20);
-        array[8] = new MyString("yopta");
+        array = giveStandardArray();
         Sortable.sortArray((new InsertionSortBinary()), array);
     }
 
