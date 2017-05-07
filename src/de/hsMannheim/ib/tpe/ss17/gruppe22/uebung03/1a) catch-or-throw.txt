@@ -1,0 +1,6 @@
+1a) catch-or-throw-Regel
+
+Eine selbstdefinierte Fehlerbedingung (try-Block mit beinhaltendem Fehler) soll im Falle, dass sie erfüllt wird, entweder direkt gecatcht werden oder gethrowt (mit throw new Exception) werden. Durch das throwen wird das Fehlerobjekt soweit nach außen geworfen bis es gecatcht wird oder nicht (wodurch eine RunTimeException oder so ausgelöst wird). 
+Das Catchen muss entweder in der Methode selbst, oder in der Klasse in der sie aufgerufen wird, erfolgen. Zweiteres erfolgt indem die Methode in einem geschützten Block aufgerufen wird und dahinter ein Catch (das fangende Catch kann wegen Verschachtelung auch weiter außen stehen) steht.
+Damit kann der Programmierer entscheiden, an welcher Stelle Fehlerbehandlungen geschehen sollen.
+Idee: Man könnte z.B. Eine Klasse schreiben, die sich komplett der Fehlerbehandlung externer Methoden widmet, wo die Fehler sich nicht intuitiv, schnell behandeln lassen.
