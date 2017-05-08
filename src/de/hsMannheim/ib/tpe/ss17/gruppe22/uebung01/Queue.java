@@ -1,12 +1,13 @@
 package de.hsMannheim.ib.tpe.ss17.gruppe22.uebung01;
 
 public class Queue {
-	BTreeNode[] q = new BTreeNode[16384];
+	BTreeNode[] q;
 	private int front = 0;
 	private int end = 0;
 	private int count = 0;
 
 	public Queue() {
+		this.q = new BTreeNode[16384];
 	}
 
 	public Queue(int length) {
