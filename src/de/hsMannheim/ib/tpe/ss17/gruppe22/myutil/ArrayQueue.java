@@ -83,6 +83,7 @@ public class ArrayQueue implements Queue {
         } catch (OverflowException e) {
             System.out.println("**OverflowException: Enter wird auf eine volle Queue angewandt.**");
             showInformation();
+            printQueue();
         }
     }
 
@@ -128,6 +129,7 @@ public class ArrayQueue implements Queue {
         } catch (UnderflowException e) {
             System.out.println("**UnderflowException: leave() kann nicht auf eine leere Queue angewandt werden!**");
             showInformation();
+            printQueue();
             return null;
         }
         if (!isEmpty()) {
