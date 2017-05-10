@@ -20,8 +20,16 @@ public class ArrayQueue implements Queue {
         return this.count;
     }
 
+    public void printQueue() {
+        for (int i = 0; i < this.q.length - 1; i++) {
+            System.out.print(this.q[i] + ", ");
+        }
+        System.out.println(this.q[this.q.length - 1]);
+    }
+
     public void showInformation() {
         System.out.println("Front: " + getFront() + "; End: " + getEnd() + "; Count: " + getCount());
+        printQueue();
     }
 
     public ArrayQueue() {
@@ -69,8 +77,11 @@ public class ArrayQueue implements Queue {
             /**
              * TODO: Implement Correctly / Correct this
              */
-            for (int i = this.front; i <= this.q.length; i++) {
-                temp[temp.length - this.q.length + this.front] = leave();
+            while (this.front >= this.end) {
+                temp[this.q.length + this.front] = leave();
+            }
+            for (int i = 0; i < this.end; i++) {
+                temp[i] = leave();
             }
             this.front = tempFront + this.q.length;
         } else {
@@ -95,7 +106,7 @@ public class ArrayQueue implements Queue {
     public Object leave() {
         Object temp;
         try {
-            temp = GiveFront();
+            temp = peak();
         } catch (NullPointerException e) {
             System.out.println("**Fehler: leave() kann nicht auf eine leere Queue angewandt werden!**");
             return null;
@@ -103,7 +114,7 @@ public class ArrayQueue implements Queue {
         if (!isEmpty()) {
 
             this.front += 1;
-            if (this.front >= this.q.length) {
+            if (this.front == this.q.length) {
                 this.front = 0;
             }
             this.count--;
@@ -111,17 +122,13 @@ public class ArrayQueue implements Queue {
         return temp;
     }
 
-    public Object GiveFront() throws NullPointerException {
+    @Override
+    public Object peak() throws NullPointerException {
         if (!isEmpty()) {
             return this.q[this.front];
         } else {
             throw new NullPointerException();
         }
-    }
-
-    @Override
-    public Object peak() {
-        return this.q[this.front];
     }
 
     @Override
@@ -142,4 +149,3 @@ public class ArrayQueue implements Queue {
         return this.count;
     }
 }
-
