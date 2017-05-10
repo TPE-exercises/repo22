@@ -41,7 +41,7 @@ public class Main {
         // Aufgabe 1b)
         System.out.println("Aufgabe 1b)");
         System.out.println();
-        System.out.println("Implementierung von Queue und Stack.");
+        System.out.println("Implementierung von Queue-Array.");
         ArrayQueue myArrayQueue = new ArrayQueue(3);
         System.out.println(myArrayQueue.leave());
         //Test Run 1
@@ -127,6 +127,20 @@ public class Main {
         System.out.println("enter(9)");
         myArrayQueue.enter(9);
         myArrayQueue.showInformation();
+
+        System.out.println("leave(): " + myArrayQueue.leave());
+        myArrayQueue.showInformation();
+        System.out.println("leave(): " + myArrayQueue.leave());
+        myArrayQueue.showInformation();
+        System.out.println("leave(): " + myArrayQueue.leave());
+        myArrayQueue.showInformation();
+        System.out.println("leave(): " + myArrayQueue.leave());
+        myArrayQueue.showInformation();
+        System.out.println("leave(): " + myArrayQueue.leave());
+        myArrayQueue.showInformation();
+        System.out.println("leave(): " + myArrayQueue.leave());
+        myArrayQueue.showInformation();
+
         System.out.println("enter(10)");
         myArrayQueue.enter(10);
         myArrayQueue.showInformation();
@@ -137,5 +151,41 @@ public class Main {
         myArrayQueue.enter(12);
         myArrayQueue.showInformation();
 
+        System.out.println("leave(): " + myArrayQueue.leave());
+        myArrayQueue.showInformation();
+        System.out.println("leave(): " + myArrayQueue.leave());
+        myArrayQueue.showInformation();
+        System.out.println("leave(): " + myArrayQueue.leave());
+        myArrayQueue.showInformation();
+        System.out.println("leave(): " + myArrayQueue.leave());
+        myArrayQueue.showInformation();
+        System.out.println("leave(): " + myArrayQueue.leave());
+        myArrayQueue.showInformation();
+        System.out.println("leave(): " + myArrayQueue.leave());
+        myArrayQueue.showInformation();
+        System.out.println("enter(13)");
+        myArrayQueue.enter(13);
+        myArrayQueue.showInformation();
+        System.out.println("enter(14)");
+        myArrayQueue.enter(14);
+        myArrayQueue.showInformation();
+        System.out.println("enter(15)");
+        myArrayQueue.enter(15);
+        myArrayQueue.showInformation();
+        System.out.println("enter(16)");
+        myArrayQueue.enter(16);
+        myArrayQueue.showInformation();
+        System.out.println("enter(17)");
+        myArrayQueue.enter(17);
+        myArrayQueue.showInformation();
+        System.out.println("enter(18)");
+        myArrayQueue.enter(18);
+        myArrayQueue.showInformation();
+        System.out.println("enter(19)");
+        myArrayQueue.enter(19);
+        myArrayQueue.showInformation();
+        System.out.println("enter(20)");
+        myArrayQueue.enter(20);
+        myArrayQueue.showInformation();
     }
 }
