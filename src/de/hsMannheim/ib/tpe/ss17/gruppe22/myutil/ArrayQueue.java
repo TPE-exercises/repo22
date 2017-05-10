@@ -19,14 +19,20 @@ public class ArrayQueue implements Queue {
     public int getCount() {
         return this.count;
     }
-
+    /**
+     * Shows valuable information for programmers and testers in the console
+     * if called in the right moments.
+     */
     public void printQueue() {
         for (int i = 0; i < this.q.length - 1; i++) {
             System.out.print(this.q[i] + ", ");
         }
         System.out.println(this.q[this.q.length - 1]);
     }
-
+    /**
+     * Shows valuable information for programmers and testers in the console
+     * if called in the right moments.
+     */
     public void showInformation() {
         System.out.println("Front: " + getFront() + "; End: " + getEnd() + "; Count: " + getCount());
         printQueue();
@@ -48,6 +54,7 @@ public class ArrayQueue implements Queue {
     }
 
     /**
+     * Adds an object at the end of the queue.
      * @param el: The element that joins the queue.
      */
     @Override
@@ -69,14 +76,15 @@ public class ArrayQueue implements Queue {
         }
     }
 
+    /**
+     * Expands the size of the queue by doubling its array size. 
+     * This can only occur once.
+     */
     public void expand() {
         Object temp[] = new Object[this.q.length * 2];
         int tempCount = this.count;
         int tempFront = this.front;
         if (this.front != 0) {
-            /**
-             * TODO: Implement Correctly / Correct this
-             */
             while (this.front >= this.end) {
                 temp[this.q.length + this.front] = leave();
             }
