@@ -91,7 +91,7 @@ public class ArrayQueue implements Queue {
      * Expands the size of the queue by doubling its array size. This can only
      * occur once.
      */
-    public void expand() {
+    private void expand() {
         Object temp[] = new Object[this.q.length * 2];
         int tempCount = this.count;
         int tempFront = this.front;
