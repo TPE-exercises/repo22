@@ -1,5 +1,7 @@
 package de.hsMannheim.ib.tpe.ss17.gruppe22.myutil;
 
+import de.hsMannheim.ib.tpe.ss17.gruppe22.exceptions.*;
+
 public class ArrayQueue implements Queue {
 
     private Object[] q;
@@ -19,9 +21,10 @@ public class ArrayQueue implements Queue {
     public int getCount() {
         return this.count;
     }
+
     /**
-     * Shows valuable information for programmers and testers in the console
-     * if called in the right moments.
+     * Shows valuable information for programmers and testers in the console if
+     * called in the right moments.
      */
     public void printQueue() {
         for (int i = 0; i < this.q.length - 1; i++) {
@@ -29,9 +32,10 @@ public class ArrayQueue implements Queue {
         }
         System.out.println(this.q[this.q.length - 1]);
     }
+
     /**
-     * Shows valuable information for programmers and testers in the console
-     * if called in the right moments.
+     * Shows valuable information for programmers and testers in the console if
+     * called in the right moments.
      */
     public void showInformation() {
         System.out.println("Front: " + getFront() + "; End: " + getEnd() + "; Count: " + getCount());
@@ -55,30 +59,36 @@ public class ArrayQueue implements Queue {
 
     /**
      * Adds an object at the end of the queue.
+     *
      * @param el: The element that joins the queue.
      */
     @Override
     public void enter(Object el) {
-        if (!isFull()) {
-            if (this.end == (this.q.length)) {
-                this.end = 0;
-            }
-            this.q[this.end] = el;
-            this.count++;
+        try {
+            if (!isFull()) {
+                if (this.end == (this.q.length)) {
+                    this.end = 0;
+                }
+                this.q[this.end] = el;
+                this.count++;
 
-            this.end++;
+                this.end++;
 
-        } else if (expandable) {
-            expand();
-            enter(el);
-        } else {
-            System.out.println("Queue is full. We are sorry.");
+            } else if (expandable) {
+                expand();
+                enter(el);
+            } else {
+                throw new OverflowException();
+            } 
+        } catch (OverflowException e) {
+            System.out.println("**OverflowException: Enter wird auf eine volle Queue angewandt.**");
+            showInformation();
         }
     }
 
     /**
-     * Expands the size of the queue by doubling its array size. 
-     * This can only occur once.
+     * Expands the size of the queue by doubling its array size. This can only
+     * occur once.
      */
     public void expand() {
         Object temp[] = new Object[this.q.length * 2];
@@ -115,8 +125,9 @@ public class ArrayQueue implements Queue {
         Object temp;
         try {
             temp = peak();
-        } catch (NullPointerException e) {
-            System.out.println("**Fehler: leave() kann nicht auf eine leere Queue angewandt werden!**");
+        } catch (UnderflowException e) {
+            System.out.println("**UnderflowException: leave() kann nicht auf eine leere Queue angewandt werden!**");
+            showInformation();
             return null;
         }
         if (!isEmpty()) {
@@ -131,11 +142,11 @@ public class ArrayQueue implements Queue {
     }
 
     @Override
-    public Object peak() throws NullPointerException {
+    public Object peak() throws UnderflowException {
         if (!isEmpty()) {
             return this.q[this.front];
         } else {
-            throw new NullPointerException();
+            throw new UnderflowException();
         }
     }
 
