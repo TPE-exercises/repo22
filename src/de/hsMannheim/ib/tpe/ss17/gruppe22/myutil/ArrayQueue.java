@@ -10,6 +10,14 @@ public class ArrayQueue implements Queue {
     private int count = 0;
     private boolean expandable = true;
 
+    public ArrayQueue() {
+        this.q = new Object[16384];
+    }
+
+    public ArrayQueue(int length) {
+        this.q = new Object[length];
+    }
+
     public int getFront() {
         return this.front;
     }
@@ -26,7 +34,7 @@ public class ArrayQueue implements Queue {
      * Shows valuable information for programmers and testers in the console if
      * called in the right moments.
      */
-    public void printQueue() {
+    private void printQueue() {
         for (int i = 0; i < this.q.length - 1; i++) {
             System.out.print(this.q[i] + ", ");
         }
@@ -37,17 +45,9 @@ public class ArrayQueue implements Queue {
      * Shows valuable information for programmers and testers in the console if
      * called in the right moments.
      */
-    public void showInformation() {
+    private void showInformation() {
         System.out.println("Front: " + getFront() + "; End: " + getEnd() + "; Count: " + getCount());
         printQueue();
-    }
-
-    public ArrayQueue() {
-        this.q = new Object[16384];
-    }
-
-    public ArrayQueue(int length) {
-        this.q = new Object[length];
     }
 
     @Override
@@ -79,12 +79,12 @@ public class ArrayQueue implements Queue {
                 enter(el);
             } else {
                 throw new OverflowException();
-            } 
+            }
         } catch (OverflowException e) {
-            System.out.println("**OverflowException: Enter wird auf eine volle Queue angewandt.**");
-            showInformation();
-            printQueue();
+            System.out.println("**" + e + ": Enter wird auf eine volle Queue angewandt!**");
+
         }
+        showInformation();
     }
 
     /**
@@ -125,11 +125,10 @@ public class ArrayQueue implements Queue {
     public Object leave() {
         Object temp;
         try {
-            temp = peak();
+            temp = givePeakElement();
         } catch (UnderflowException e) {
-            System.out.println("**UnderflowException: leave() kann nicht auf eine leere Queue angewandt werden!**");
+            System.out.println("**" + e + ": leave() kann nicht auf eine leere Queue angewandt werden!**");
             showInformation();
-            printQueue();
             return null;
         }
         if (!isEmpty()) {
@@ -140,15 +139,25 @@ public class ArrayQueue implements Queue {
             }
             this.count--;
         }
+        showInformation();
         return temp;
     }
 
-    @Override
-    public Object peak() throws UnderflowException {
+    private Object givePeakElement() throws UnderflowException {
         if (!isEmpty()) {
             return this.q[this.front];
         } else {
             throw new UnderflowException();
+        }
+    }
+
+    @Override
+    public Object peak() {
+        try {
+            return givePeakElement();
+        } catch(UnderflowException e) {
+            System.out.println("**" + e + ": Es sind keine Elemente in der Queue!**");
+            return null;
         }
     }
 
