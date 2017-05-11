@@ -1,6 +1,7 @@
 package de.hsMannheim.ib.tpe.ss17.gruppe22.uebung03;
 
 import de.hsMannheim.ib.tpe.ss17.gruppe22.myutil.*;
+import de.hsMannheim.ib.tpe.ss17.gruppe22.exceptions.*;
 
 public class Main {
 
@@ -41,151 +42,102 @@ public class Main {
         // Aufgabe 1b)
         System.out.println("Aufgabe 1b)");
         System.out.println();
-        System.out.println("Implementierung von Queue-Array.");
+        System.out.println("Implementierung von ArrayQueue.");
         ArrayQueue myArrayQueue = new ArrayQueue(3);
+        System.out.println("peak(): " + myArrayQueue.peak());
         System.out.println(myArrayQueue.leave());
         //Test Run 1
 //        System.out.println("enter(1)");
 //        myArrayQueue.enter(1);
-//        myArrayQueue.showInformation();
 //        System.out.println("enter(2)");
 //        myArrayQueue.enter(2);
-//        myArrayQueue.showInformation();
 //        System.out.println("enter(3)");
 //        myArrayQueue.enter(3);
-//        myArrayQueue.showInformation();
 //        System.out.println("enter(4)");
 //        myArrayQueue.enter(4);
-//        myArrayQueue.showInformation();
 //        System.out.println("enter(5)");
 //        myArrayQueue.enter(5);
-//        myArrayQueue.showInformation();
 //        System.out.println("enter(6)");
 //        myArrayQueue.enter(6);
-//        myArrayQueue.showInformation();
 //        System.out.println("enter(7)");
 //        myArrayQueue.enter(7);
-//        myArrayQueue.showInformation();
 //        System.out.println("leave(): " + myArrayQueue.leave());
-//        myArrayQueue.showInformation();
 //        System.out.println("leave(): " + myArrayQueue.leave());
-//        myArrayQueue.showInformation();
 //        System.out.println("leave(): " + myArrayQueue.leave());
-//        myArrayQueue.showInformation();
 //        System.out.println("leave(): " + myArrayQueue.leave());
-//        myArrayQueue.showInformation();
 //        System.out.println("leave(): " + myArrayQueue.leave());
-//        myArrayQueue.showInformation();
 //        System.out.println("leave(): " + myArrayQueue.leave());
-//        myArrayQueue.showInformation();
 //        System.out.println("leave(): " + myArrayQueue.leave());
-//        myArrayQueue.showInformation();
 //        System.out.println("leave(): " + myArrayQueue.leave());
-//        myArrayQueue.showInformation();
 //        System.out.println("leave(): " + myArrayQueue.leave());
-//        myArrayQueue.showInformation();
 //        System.out.println("leave(): " + myArrayQueue.leave());
-//        myArrayQueue.showInformation();
 //        System.out.println("leave(): " + myArrayQueue.leave());
-//        myArrayQueue.showInformation();
 
         // Test Run 2
         System.out.println("enter(1)");
         myArrayQueue.enter(1);
-        myArrayQueue.showInformation();
         System.out.println("enter(2)");
         myArrayQueue.enter(2);
-        myArrayQueue.showInformation();
         System.out.println("leave(): " + myArrayQueue.leave());
-        myArrayQueue.showInformation();
         System.out.println("enter(3)");
         myArrayQueue.enter(3);
-        myArrayQueue.showInformation();
         System.out.println("enter(4)");
         myArrayQueue.enter(4);
-        myArrayQueue.showInformation();
-        System.out.println("leave(): " + myArrayQueue.leave());
-        myArrayQueue.showInformation();
-        System.out.println("enter(5)");
-        myArrayQueue.enter(5);
-        myArrayQueue.showInformation();
-        System.out.println("leave(): " + myArrayQueue.leave());
-        myArrayQueue.showInformation();
-        System.out.println("leave(): " + myArrayQueue.leave());
-        myArrayQueue.showInformation();
-        System.out.println("leave(): " + myArrayQueue.leave());
-        myArrayQueue.showInformation();
-        System.out.println("enter(6)");
-        myArrayQueue.enter(6);
-        myArrayQueue.showInformation();
-        System.out.println("enter(7)");
-        myArrayQueue.enter(7);
-        myArrayQueue.showInformation();
-        System.out.println("enter(8)");
-        myArrayQueue.enter(8);
-        myArrayQueue.showInformation();
-        System.out.println("enter(9)");
-        myArrayQueue.enter(9);
-        myArrayQueue.showInformation();
 
         System.out.println("leave(): " + myArrayQueue.leave());
-        myArrayQueue.showInformation();
+        System.out.println("enter(5)");
+        myArrayQueue.enter(5);
         System.out.println("leave(): " + myArrayQueue.leave());
-        myArrayQueue.showInformation();
         System.out.println("leave(): " + myArrayQueue.leave());
-        myArrayQueue.showInformation();
         System.out.println("leave(): " + myArrayQueue.leave());
-        myArrayQueue.showInformation();
+        System.out.println("enter(6)");
+        myArrayQueue.enter(6);
+        System.out.println("enter(7)");
+        myArrayQueue.enter(7);
+        System.out.println("enter(8)");
+        myArrayQueue.enter(8);
+        System.out.println("enter(9)");
+        myArrayQueue.enter(9);
+
         System.out.println("leave(): " + myArrayQueue.leave());
-        myArrayQueue.showInformation();
         System.out.println("leave(): " + myArrayQueue.leave());
-        myArrayQueue.showInformation();
+        System.out.println("leave(): " + myArrayQueue.leave());
+        System.out.println("leave(): " + myArrayQueue.leave());
+        System.out.println("leave(): " + myArrayQueue.leave());
+        System.out.println("leave(): " + myArrayQueue.leave());
 
         System.out.println("enter(10)");
         myArrayQueue.enter(10);
-        myArrayQueue.showInformation();
         System.out.println("enter(11)");
         myArrayQueue.enter(11);
-        myArrayQueue.showInformation();
         System.out.println("enter(12)");
         myArrayQueue.enter(12);
-        myArrayQueue.showInformation();
 
         System.out.println("leave(): " + myArrayQueue.leave());
-        myArrayQueue.showInformation();
         System.out.println("leave(): " + myArrayQueue.leave());
-        myArrayQueue.showInformation();
         System.out.println("leave(): " + myArrayQueue.leave());
-        myArrayQueue.showInformation();
         System.out.println("leave(): " + myArrayQueue.leave());
-        myArrayQueue.showInformation();
         System.out.println("leave(): " + myArrayQueue.leave());
-        myArrayQueue.showInformation();
         System.out.println("leave(): " + myArrayQueue.leave());
-        myArrayQueue.showInformation();
         System.out.println("enter(13)");
         myArrayQueue.enter(13);
-        myArrayQueue.showInformation();
         System.out.println("enter(14)");
         myArrayQueue.enter(14);
-        myArrayQueue.showInformation();
         System.out.println("enter(15)");
         myArrayQueue.enter(15);
-        myArrayQueue.showInformation();
         System.out.println("enter(16)");
         myArrayQueue.enter(16);
-        myArrayQueue.showInformation();
         System.out.println("enter(17)");
         myArrayQueue.enter(17);
-        myArrayQueue.showInformation();
         System.out.println("enter(18)");
         myArrayQueue.enter(18);
-        myArrayQueue.showInformation();
         System.out.println("enter(19)");
         myArrayQueue.enter(19);
-        myArrayQueue.showInformation();
         System.out.println("enter(20)");
         myArrayQueue.enter(20);
-        myArrayQueue.showInformation();
+
+        System.out.println();
+        System.out.println("Implementierung von ArrayStack.");
+
     }
 }
