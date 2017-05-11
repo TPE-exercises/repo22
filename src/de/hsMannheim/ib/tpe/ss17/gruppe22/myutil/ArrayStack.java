@@ -10,24 +10,10 @@ import de.hsMannheim.ib.tpe.ss17.gruppe22.exceptions.*;
  */
 public class ArrayStack implements Stack {
 
+    // Pointer shows on the currently highest element on the stack.
     int pointer = -1;
     boolean expandable = true;
     Object array[];
-
-    private int getPointer() {
-        return this.pointer;
-    }
-
-    private void printStack() {
-        for (int i = 0; i < this.array.length - 1; i++) {
-            System.out.print(array[i] + ", ");
-        }
-        System.out.println(this.array[this.array.length]);
-    }
-
-    private void showInformation() {
-
-    }
 
     public ArrayStack() {
         this.array = new Object[128];
@@ -37,6 +23,22 @@ public class ArrayStack implements Stack {
         this.array = new Object[size];
     }
 
+    private int getPointer() {
+        return this.pointer;
+    }
+
+    private void printStack() {
+        for (int i = 0; i < this.array.length - 1; i++) {
+            System.out.print(array[i] + ", ");
+        }
+        System.out.println(this.array[this.array.length - 1]);
+    }
+
+    private void showInformation() {
+        System.out.println("Pointer: " + getPointer() + "; Expandable: " + this.expandable);
+        printStack();
+    }
+
     @Override
     public boolean isEmpty() {
         return this.pointer == -1;
@@ -44,11 +46,16 @@ public class ArrayStack implements Stack {
 
     @Override
     public int size() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.pointer + 1;
     }
 
-    public void expand() {
-
+    private void expand() {
+        Object tempArray[] = new Object[this.array.length*2];
+        for (int i = 0; i < this.array.length; i++) {
+            tempArray[i] = this.array[i];
+        }
+        this.array = tempArray;
+        this.expandable = false;
     }
 
     @Override
@@ -63,8 +70,10 @@ public class ArrayStack implements Stack {
             }
             this.pointer++;
             this.array[pointer] = el;
+            showInformation();
         } catch (OverflowException e) {
             System.out.println("**" + e + ": Es wird versucht auf einen vollen Stack zu pushen!");
+            showInformation();
         }
     }
 
