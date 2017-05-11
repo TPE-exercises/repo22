@@ -26,10 +26,6 @@ public class ArrayQueue implements Queue {
         return this.end;
     }
 
-    public int getCount() {
-        return this.count;
-    }
-
     /**
      * Shows valuable information for programmers and testers in the console if
      * called in the right moments.
@@ -46,7 +42,7 @@ public class ArrayQueue implements Queue {
      * called in the right moments.
      */
     private void showInformation() {
-        System.out.println("Front: " + getFront() + "; End: " + getEnd() + "; Count: " + getCount());
+        System.out.println("Front: " + getFront() + "; End: " + getEnd() + "; Count: " + size() + "; Expandable: " + this.expandable);
         printQueue();
     }
 
