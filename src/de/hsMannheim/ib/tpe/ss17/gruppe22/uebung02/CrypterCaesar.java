@@ -99,7 +99,15 @@ public class CrypterCaesar implements Crypter {
 		setCharShift(this.alphabet.length - charShift);
 		return decryptedText;
 	}
-
+/**
+ * Resets both standard alphabets to a new, wished one.
+ * @param newAlphabet The new alphabet.
+ */
+	public void setAlphabet(char[] newAlphabet) {
+		this.alphabet = newAlphabet;
+		this.smallAlphabet = newAlphabet;
+		setCharShift(this.charShift);
+	}
 	/**
 	 * The number below shall have an end value which lies inbetween 0 and our
 	 * alphabet length (by standard: 26). It is the same story as with Modulo in
