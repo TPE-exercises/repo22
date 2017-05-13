@@ -1,7 +1,6 @@
 package de.hsMannheim.ib.tpe.ss17.gruppe22.uebung02;
 
 public class CrypterCaesar implements Crypter {
-	// What's the matter with small and Capital letters in this scenario?
 	private char[] smallAlphabet = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
 			'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
 	private char[] alphabet = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
