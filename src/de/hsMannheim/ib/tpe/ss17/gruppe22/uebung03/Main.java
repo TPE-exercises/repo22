@@ -186,8 +186,14 @@ public class Main {
                     + "\n Übersetzt heißt das: Ich kam, ich sah, ich siegte.");
             foo.write("b");
             foo.write('b');
+            
             char testArray[] = new char[]{'A', 'B', 'C', 'a', 'b', 'c', 'Ä', 'Ö', 'Ü', 'ä', 'ö', 'ü'};
+            System.out.println("write(char[]) ");
             foo.write(testArray);
+            System.out.println("write(char[], 3, 3)");
+            foo.write(testArray, 3, 3);
+            System.out.println("write(String, 0, 5)");
+            foo.write("Hallöchen", 0, 5);
             foo.close();
         } catch (IOException e) {
             System.out.println(e + ": Dateiendung ungültig!");
