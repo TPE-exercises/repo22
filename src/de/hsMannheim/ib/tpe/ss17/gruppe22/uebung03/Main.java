@@ -2,10 +2,11 @@ package de.hsMannheim.ib.tpe.ss17.gruppe22.uebung03;
 
 import de.hsMannheim.ib.tpe.ss17.gruppe22.myutil.*;
 import de.hsMannheim.ib.tpe.ss17.gruppe22.exceptions.*;
+import java.io.*;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         int intArray[] = new int[15];
         // Aufgabe 1a)
         System.out.println("Aufgabe 1a)");
@@ -140,23 +141,56 @@ public class Main {
         //Implementation of Stack as Array
         System.out.println("Implementierung von ArrayStack.");
         Stack myStack = new ArrayStack(3);
-        
+
         System.out.println("peak(): " + myStack.peak());
+        System.out.println("push(1)");
         myStack.push(1);
+        System.out.println("push(2)");
         myStack.push(2);
+        System.out.println("push(3)");
         myStack.push(3);
+        System.out.println("push(4)");
         myStack.push(4);
         System.out.println("pop(): " + myStack.pop());
         System.out.println("pop(): " + myStack.pop());
         System.out.println("pop(): " + myStack.pop());
-        System.out.println("pop(): " + myStack.pop());      
-                myStack.push(1);
+        System.out.println("pop(): " + myStack.pop());
+        System.out.println("pop(): " + myStack.pop());
+        System.out.println("push(5)");
         myStack.push(5);
+        System.out.println("push(6)");
         myStack.push(6);
+        System.out.println("push(7)");
         myStack.push(7);
-                myStack.push(8);
+        System.out.println("push(8)");
+        myStack.push(8);
+        System.out.println("push(9)");
         myStack.push(9);
+        System.out.println("push(10)");
         myStack.push(10);
+        System.out.println("push(11)");
         myStack.push(11);
+        System.out.println("push(12)");
+        myStack.push(12);
+
+        System.out.println();
+        System.out.println();
+        // Task 2)
+        try {
+            PrintWriter f = new PrintWriter(new FileWriter("B:\\Hochschule Mannheim\\TPE\\Test.txt"));
+            f.println("HalloleEEE!");
+            f.close();
+            CaesarWriter foo = new CaesarWriter ((new CaesarWriter((new CaesarWriter(new PrintWriter("B:\\Hochschule Mannheim\\TPE\\Test.txt"), 1)),1)), 1);
+//            CaesarWriter foo = new CaesarWriter(new PrintWriter("B:\\Hochschule Mannheim\\TPE\\Test.txt"), 1);
+            foo.write("Julius Caesar sagte den folgenden berühmten Satz: Veni vidi vici. "
+                    + "\n Übersetzt heißt das: Ich kam, ich sah, ich siegte.");
+            foo.write("b");
+            foo.write('b');
+            char testArray[] = new char[]{'A', 'B', 'C', 'a', 'b', 'c', 'Ä', 'Ö', 'Ü', 'ä', 'ö', 'ü'};
+            foo.write(testArray);
+            foo.close();
+        } catch (IOException e) {
+            System.out.println(e + ": Dateiendung ungültig!");
+        }
     }
 }
