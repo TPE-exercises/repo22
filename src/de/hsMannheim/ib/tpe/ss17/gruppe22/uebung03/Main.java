@@ -176,7 +176,9 @@ public class Main {
         System.out.println();
         System.out.println();
         // Task 2)
+        // a) Writer
         try {
+            System.out.println("Writer-Test: ")
             PrintWriter f = new PrintWriter(new FileWriter("B:\\Hochschule Mannheim\\TPE\\PrintWr,FileWr,.txt"));
             f.println("HalloleEEE!");
 
@@ -205,13 +207,10 @@ public class Main {
             can.write("jojo!");
             can.close();
             ca.close();            
-            System.out.println();
-            System.out.println("Reader: ");
-            
-            Reader myReader = new CaesarReader(new FileReader("B:\\Hochschule Mannheim\\TPE\\can.txt"), 1);
-            myReader.close();
+
         } catch (IOException e) {
             System.out.println(e + ": Dateiendung ungültig!");
         }
+        // b) Reader
     }
 }
