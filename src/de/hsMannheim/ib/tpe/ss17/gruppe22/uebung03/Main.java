@@ -206,11 +206,20 @@ public class Main {
             ca.write("Hallo Welt!");
             can.write("jojo!");
             can.close();
-            ca.close();            
+            ca.close();  
+            
+            //Reader
+            
+   			CaesarReader fooRead = new CaesarReader(new FileReader("B:\\Hochschule Mannheim\\TPE\\CaeWr,CaeWr,PrintWr.txt"), 3);
+			int c;
+			while ((c = fooRead.read()) != -1) {
+				System.out.print((char) c);
+			}
+			fooRead.close();
 
         } catch (IOException e) {
             System.out.println(e + ": Dateiendung ungültig!");
         }
-        // b) Reader
+      
     }
 }
