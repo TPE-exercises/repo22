@@ -177,16 +177,16 @@ public class Main {
         System.out.println();
         // Task 2)
         try {
-            PrintWriter f = new PrintWriter(new FileWriter("B:\\Hochschule Mannheim\\TPE\\Test.txt"));
+            PrintWriter f = new PrintWriter(new FileWriter("B:\\Hochschule Mannheim\\TPE\\PrintWr,FileWr,.txt"));
             f.println("HalloleEEE!");
-            f.close();
-            CaesarWriter foo = new CaesarWriter ((new CaesarWriter((new CaesarWriter(new PrintWriter("B:\\Hochschule Mannheim\\TPE\\Test.txt"), 1)),1)), 1);
+
+            CaesarWriter foo = new CaesarWriter((new CaesarWriter((new CaesarWriter(new PrintWriter("B:\\Hochschule Mannheim\\TPE\\CaeWr,CaeWr,PrintWr.txt"), 1)), 1)), 1);
 //            CaesarWriter foo = new CaesarWriter(new PrintWriter("B:\\Hochschule Mannheim\\TPE\\Test.txt"), 1);
             foo.write("Julius Caesar sagte den folgenden berühmten Satz: Veni vidi vici. "
                     + "\n Übersetzt heißt das: Ich kam, ich sah, ich siegte.");
             foo.write("b");
             foo.write('b');
-            
+
             char testArray[] = new char[]{'A', 'B', 'C', 'a', 'b', 'c', 'Ä', 'Ö', 'Ü', 'ä', 'ö', 'ü'};
             System.out.println("write(char[]) ");
             foo.write(testArray);
@@ -194,7 +194,22 @@ public class Main {
             foo.write(testArray, 3, 3);
             System.out.println("write(String, 0, 5)");
             foo.write("Hallöchen", 0, 5);
+
+            f.println();
+            f.write("Zweite Zeile.");
+            f.close();
             foo.close();
+            Writer can = new CaesarWriter(new FileWriter("B:\\Hochschule Mannheim\\TPE\\can.txt"), 1);
+            CaesarWriter ca = new CaesarWriter(new FileWriter("B:\\Hochschule Mannheim\\TPE\\CaeWr,FileWr.txt"));
+            ca.write("Hallo Welt!");
+            can.write("jojo!");
+            can.close();
+            ca.close();            
+            System.out.println();
+            System.out.println("Reader: ");
+            
+            Reader myReader = new CaesarReader(new FileReader("B:\\Hochschule Mannheim\\TPE\\can.txt"), 1);
+            myReader.close();
         } catch (IOException e) {
             System.out.println(e + ": Dateiendung ungültig!");
         }
