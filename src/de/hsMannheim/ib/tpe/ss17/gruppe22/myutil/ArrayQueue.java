@@ -69,10 +69,11 @@ public class ArrayQueue implements Queue {
                 this.count++;
 
                 this.end++;
-
+//                showInformation();
             } else if (expandable) {
                 expand();
                 enter(el);
+                showInformation();
             } else {
                 throw new OverflowException();
             }
@@ -80,7 +81,7 @@ public class ArrayQueue implements Queue {
             System.out.println("**" + e + ": Enter wird auf eine volle Queue angewandt!**");
 
         }
-        showInformation();
+        
     }
 
     /**
@@ -124,7 +125,7 @@ public class ArrayQueue implements Queue {
             temp = givePeakElement();
         } catch (UnderflowException e) {
             System.out.println("**" + e + ": leave() kann nicht auf eine leere Queue angewandt werden!**");
-            showInformation();
+//            showInformation();
             return null;
         }
         if (!isEmpty()) {
@@ -135,7 +136,7 @@ public class ArrayQueue implements Queue {
             }
             this.count--;
         }
-        showInformation();
+//        showInformation();
         return temp;
     }
 
