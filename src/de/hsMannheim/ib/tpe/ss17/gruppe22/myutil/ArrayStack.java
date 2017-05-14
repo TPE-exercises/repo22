@@ -54,6 +54,7 @@ public class ArrayStack implements Stack {
         for (int i = 0; i < this.array.length; i++) {
             tempArray[i] = this.array[i];
         }
+        System.out.println("Die Größe des Stacks wurde verdoppelt.");
         this.array = tempArray;
         this.expandable = false;
     }
@@ -64,16 +65,17 @@ public class ArrayStack implements Stack {
             if ((this.pointer + 1) == this.array.length) {
                 if (expandable) {
                     expand();
+                    showInformation();
                 } else {
                     throw new OverflowException();
                 }
             }
             this.pointer++;
             this.array[pointer] = el;
-            showInformation();
+//            showInformation();
         } catch (OverflowException e) {
             System.out.println("**" + e + ": Es wird versucht auf einen vollen Stack zu pushen!");
-            showInformation();
+//            showInformation();
         }
     }
 
@@ -87,12 +89,12 @@ public class ArrayStack implements Stack {
         try {
             Object temp = givePeakElement();
             this.pointer--;
-            showInformation();
             return temp;
         } catch (UnderflowException e) {
             System.out.println("**" + e + ": Ein leerer Stack kann nicht gepoppt werden!**");
-            showInformation();
             return null;
+        } finally {
+//            showInformation();
         }
     }
 
