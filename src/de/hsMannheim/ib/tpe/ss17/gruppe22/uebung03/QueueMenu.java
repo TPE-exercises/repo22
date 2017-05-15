@@ -10,7 +10,9 @@ public class QueueMenu {
 	static int current = 0;
 	public static void main(String[] args){
 		workspaces[0] = new LinkedListQueue();
-		workspaces[1] = new ArrayQueue();
+		System.out.println("Welche Größe soll die Queue (mit Array) haben?");
+		int size = readInt();
+		workspaces[1] = new ArrayQueue(size);
 
 		
 		while(on)
@@ -18,6 +20,10 @@ public class QueueMenu {
 	}
 	public static void createMenu(){
 		System.out.println("-------Menü-------");
+		if (current == 0)
+			System.out.println("Implementierung mit LinkedList");
+		else
+			System.out.println("Implementierung mit Array");
 		System.out.println("1: Einfügen");
 		System.out.println("2: Rausholen");
 		System.out.println("3: Ansehen");
