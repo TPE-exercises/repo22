@@ -12,7 +12,9 @@ public class StackMenu {
 
 	public static void main(String[] args) {
 		workspaces[0] = new LinkedListStack();
-		workspaces[1] = new ArrayStack();
+		System.out.println("Welche Größe soll der Stack (mit Array) haben?");
+		int size = readInt();
+		workspaces[1] = new ArrayStack(size);
 
 		while (on)
 			createMenu();
@@ -20,6 +22,10 @@ public class StackMenu {
 
 	public static void createMenu() {
 		System.out.println("-------Menü-------");
+		if (current == 0)
+			System.out.println("Implementierung mit LinkedList");
+		else
+			System.out.println("Implementierung mit Array");
 		System.out.println("1: Einfügen");
 		System.out.println("2: Rausholen");
 		System.out.println("3: Ansehen");
