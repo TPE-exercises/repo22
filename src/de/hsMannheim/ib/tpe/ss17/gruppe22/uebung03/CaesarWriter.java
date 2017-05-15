@@ -40,12 +40,14 @@ public class CaesarWriter extends FilterWriter {
     @Override
     public void write(char[] cbuf, int off, int len) throws IOException {
         char[] temp = new char[len];
+        int counter = 0;
         for (int i = off; len > 0; i++) {
             if (i >= cbuf.length) {
                 throw new IOException();
             }
+            temp[counter] = cbuf[i];
+            counter++;
             len--;
-            temp[i] = cbuf[i];
         }
         write(temp);
     }
@@ -82,6 +84,8 @@ public class CaesarWriter extends FilterWriter {
      * Encrypts a portion of a string and writes it. The encryption takes place
      * in write(String).
      *
+     * @param str the string to be encrypted
+     * @param off the offset point
      * @throws java.io.IOException
      */
     @Override
