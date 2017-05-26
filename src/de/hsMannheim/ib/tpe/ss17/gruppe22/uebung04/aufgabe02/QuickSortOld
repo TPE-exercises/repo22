@@ -1,0 +1,70 @@
+package de.hsMannheim.informatik.ads.uebung04;
+
+import static gdi.MakeItSimple.*;
+
+public class QuickSort {
+
+	public static int swap = 0;
+	public static int compare = 0;
+	public static int recursionSteps = -1;
+
+	static void printArray(int[] arrayOfNumbers) {
+		for (int i = 0; i < arrayOfNumbers.length; i++)
+			print(arrayOfNumbers[i] + ", ");
+		println();
+	}
+
+	static void swap(int[] arrayOfNumbers, int i, int j) {
+		// swapping i and j
+		int t = arrayOfNumbers[i];
+		arrayOfNumbers[i] = arrayOfNumbers[j];
+		arrayOfNumbers[j] = t;
+	}
+
+	static void quickSort(int[] arrayOfNumbers, int lowerBorder, int upperBorder) {
+		recursionSteps++;
+		if (lowerBorder < upperBorder) {
+			int index = divide(arrayOfNumbers, lowerBorder, upperBorder);
+			printArray(arrayOfNumbers);
+			quickSort(arrayOfNumbers, lowerBorder, index - 1);
+			quickSort(arrayOfNumbers, index + 1, upperBorder);
+
+		}
+	}
+
+	static int divide(int[] arrayOfNumbers, int lowerBorder, int upperBorder) {
+		int pivot = upperBorder;
+		int index = lowerBorder;
+		//looks for pivots final position by putting everything smaller (or even) than pivot on the left side
+		//index remembers up to which point everything is smaller (or even) than pivot
+		for (int pointer = index; pointer < upperBorder; pointer++) {
+			if (arrayOfNumbers[pointer] <= arrayOfNumbers[pivot]) {
+				swap(arrayOfNumbers, index, pointer);
+				if (index != pointer)
+					swap++;
+				index++;
+			}
+			compare++;
+		}
+		//puts pivot on its final position
+		swap(arrayOfNumbers, index, pivot);
+		if (index != pivot)
+			swap++;
+		return index;
+	}
+
+	public static void main(String[] args) {
+		int[] arrayOfNumbers = new int[5];
+
+		for (int i = 0; i < arrayOfNumbers.length; i++) {
+			arrayOfNumbers[i] = (int) Math.floor(Math.random() * 100 + 1);
+		}
+		printArray(arrayOfNumbers);
+		quickSort(arrayOfNumbers, 0, arrayOfNumbers.length - 1);
+
+		println("Anzahl der Rekursionsschritte: " + recursionSteps);
+		println("Anzahl der Vertauschungen: " + swap);
+		println("Anzahl der Schlüsselvergleiche: " + compare);
+	}
+
+}
