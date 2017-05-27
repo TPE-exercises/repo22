@@ -63,12 +63,13 @@ public class BankAccount {
     }
     public static void main(String[]args) {
         // starting balance by default is 1000€
-//        BankAccountThread depositor = new DepositorThread(500);
-//        depositor.start();
         BankAccountThread withdrawer = new WithdrawerThread(1200);
         withdrawer.start();
+        BankAccountThread depositor = new DepositorThread(500);
+        depositor.start();
+        
     
-        BankAccountThread withdrawer2 = new WithdrawerThread(1200);
-        withdrawer2.start();
+//        BankAccountThread withdrawer2 = new WithdrawerThread(1200);
+//        withdrawer2.start();
     }
 }
