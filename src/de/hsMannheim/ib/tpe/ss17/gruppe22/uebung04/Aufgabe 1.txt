@@ -1,0 +1,9 @@
+Greifen mehrere Threads auf gemeinsame Daten zu, können Safety Hazards entstehen. Threads wechseln nämlich nicht frühestens von rechenwillig zu rechnend, nachdem sie eine Java-Zeile / -Zuweisung durchgeführt haben, sondern nachdem sie einen Befehl auf Byte- / Assembler-Ebene abgearbeitet haben.
+Z.b. könnte ein Thread vor seinem letzten Speicherbefehl pausiert werden, wobei ein anderer Thread einsetzt und mit den durch den vorigen Thread veränderten Daten arbeitet und seine Methode, die etwas speichert,  abschließt, und am Schluss diesen ausführen, womit Daten auf unerwünschte Weise überschrieben werden. => Safety Hazard
+Deswegen müssen Threads synchronisiert werden.
+Will jemand mehr Geld als auf dem Konto ist abheben, muss er / sie warten bis genug Geld eingezahlt wurde oder es später nochmal versuchen. Im ersten Fall wird also auf eine Bedingung gewartet.
+Würde in der BankAccount-Klasse in withdraw wait() nicht aufgerufen werden, dann wäre dieser Thread in einer Endlosschleife und andere Threads kämen nicht mehr zum Zuge. => Deadlock
+Ein Livelock ensteht z.B. dadurch, dass nun zwei Leute, die vomselben Konto abheben wollen, sich gegenseitig Bescheid geben, dass die andere Person es nochmal versuchen soll, wenn man selbst das Geld nicht abheben konnte. Dies ist im Grunde nur eine andere Form einer Endlosschleife.
+=> Livelock
+Ein weiteres Problem wäre, wenn zwei Mal abgehoben werden will und einmal eingezahlt, wobei das Abheben vor der Einzahlung scheitert und zudem das Abheben jedes Mal vor dem Einzahlen aufgerufen wird. Das Einzahlen wird vernachlässigt, verhungert. => Starvation
+Jedoch noch kein Wissen über Prioritäten erhalten.
