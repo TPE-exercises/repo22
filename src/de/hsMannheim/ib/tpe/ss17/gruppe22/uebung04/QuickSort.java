@@ -1,32 +1,37 @@
 package de.hsMannheim.ib.tpe.ss17.gruppe22.uebung04;
 
-import static gdi.MakeItSimple.*;
-
-public abstract class QuickSort implements SortAlgorithm {
+public class QuickSort implements SortAlgorithm {
 
     public static int swap = 0;
     public static int compare = 0;
     public static int recursionSteps = -1;
 
+    /**
+     * Splits the given range of the array in two parts 
+     * @param array
+     * @param lowerBorder
+     * @param upperBorder
+     * @return
+     */
     public int divide(Comparable[] array, int lowerBorder, int upperBorder) {
-        int pivot = upperBorder;
+        int pivotPos = upperBorder;
         int index = lowerBorder;
         //looks for pivots final position by putting everything smaller (or even) than pivot on the left side
         //index remembers up to which point everything is smaller (or even) than pivot
         for (int pointer = index; pointer < upperBorder; pointer++) {
-            if (array[pointer].compareTo(pivot) <= 0) {
+            if (array[pointer].compareTo(array[pivotPos]) <= 0) {
                 swap(array, index, pointer);
                 if (index != pointer) {
-                    swap++;
+                	synchronized (this) {swap++;}
                 }
                 index++;
             }
-            compare++;
+            synchronized (this) {compare++;}
         }
         //puts pivot on its final position
-        swap(array, index, pivot);
-        if (index != pivot) {
-            swap++;
+        swap(array, index, pivotPos);
+        if (index != pivotPos) {
+        	synchronized (this) {swap++;}
         }
         return index;
     }
@@ -38,14 +43,12 @@ public abstract class QuickSort implements SortAlgorithm {
      */
     public void printArray(Comparable[] array) {
         for (int i = 0; i < array.length - 1; i++) {
-            print(array[i] + ", ");
+        	System.out.print(array[i] + ", ");
         }
-        print(array[array.length - 1]);
-        println();
+        System.out.print(array[array.length - 1]);
+        System.out.println();
     }
 
-    @Override
-    abstract public void sort(Comparable[]);
     
     /**
      * Swaps two elements from two given indices within an array.
@@ -65,7 +68,7 @@ public abstract class QuickSort implements SortAlgorithm {
         recursionSteps++;
         if (lowerBorder < upperBorder) {
             int index = divide(array, lowerBorder, upperBorder);
-            printArray(array);
+            //printArray(array);
             quickSort(array, lowerBorder, index - 1);
             quickSort(array, index + 1, upperBorder);
 
@@ -73,18 +76,49 @@ public abstract class QuickSort implements SortAlgorithm {
     }
 
     public static void main(String[] args) {
-        Integer[] arrayOfNumbers = new Integer[]{20, 16, 30, 12, 5};
+    	System.out.println("Parallel:");
+        Integer[] arrayOfNumbers = new Integer[]{20, 16, 30, 12, 5,80, 45, 1, 48, 75, 46, 78, 95, 125, 100, 99};
 //		int[] arrayOfNumbers = new int[5];
 //		for (int i = 0; i < arrayOfNumbers.length; i++) {
 //			arrayOfNumbers[i] = (int) Math.floor(Math.random() * 100 + 1);
 //		}
-        QuickSort mySorter = new QuickSortSeq();
+        QuickSort mySorter = new QuickSortPar(arrayOfNumbers, 0, arrayOfNumbers.length - 1);
         mySorter.printArray(arrayOfNumbers);
+        double startTime = System.currentTimeMillis();
         mySorter.quickSort(arrayOfNumbers, 0, arrayOfNumbers.length - 1);
+        double endTime = System.currentTimeMillis();
+        mySorter.printArray(arrayOfNumbers);
 
-        println("Anzahl der Rekursionsschritte: " + recursionSteps);
-        println("Anzahl der Vertauschungen: " + swap);
-        println("Anzahl der Schlüsselvergleiche: " + compare);
+        System.out.println("Anzahl der Rekursionsschritte: " + recursionSteps);
+        System.out.println("Anzahl der Vertauschungen: " + swap);
+        System.out.println("Anzahl der Schlüsselvergleiche: " + compare);
+        System.out.println("Anzahl der Threads: " + QuickSortPar.numberOfThreads);
+        System.out.println("Vergangene Zeit: " + (endTime - startTime));
+        System.out.println("");
+        
+        System.out.println("Sequentiell:");
+        arrayOfNumbers = new Integer[]{20, 16, 30, 12, 5,80, 45, 1, 48, 75, 46, 78, 95, 125, 100, 99};
+//		int[] arrayOfNumbers = new int[5];
+//		for (int i = 0; i < arrayOfNumbers.length; i++) {
+//			arrayOfNumbers[i] = (int) Math.floor(Math.random() * 100 + 1);
+//		}
+        mySorter = new QuickSortSeq();
+        mySorter.printArray(arrayOfNumbers);
+        startTime = System.currentTimeMillis();
+        mySorter.quickSort(arrayOfNumbers, 0, arrayOfNumbers.length - 1);
+        endTime = System.currentTimeMillis();
+        mySorter.printArray(arrayOfNumbers);
+
+        System.out.println("Anzahl der Rekursionsschritte: " + recursionSteps);
+        System.out.println("Anzahl der Vertauschungen: " + swap);
+        System.out.println("Anzahl der Schlüsselvergleiche: " + compare);
+        System.out.println("Vergangene Zeit: " + (endTime - startTime));
     }
+
+	@Override
+	public void sort(Comparable[] array) {
+		this.quickSort(array, 0, array.length - 1);
+		
+	}
 
 }
