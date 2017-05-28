@@ -7,7 +7,8 @@ public class QuickSort implements SortAlgorithm {
     public static int recursionSteps = -1;
 
     /**
-     * Splits the given range of the array in two parts 
+     * Splits the given range of the array in two parts
+     *
      * @param array
      * @param lowerBorder
      * @param upperBorder
@@ -22,16 +23,22 @@ public class QuickSort implements SortAlgorithm {
             if (array[pointer].compareTo(array[pivotPos]) <= 0) {
                 swap(array, index, pointer);
                 if (index != pointer) {
-                	synchronized (this) {swap++;}
+                    synchronized (this) {
+                        swap++;
+                    }
                 }
                 index++;
             }
-            synchronized (this) {compare++;}
+            synchronized (this) {
+                compare++;
+            }
         }
         //puts pivot on its final position
         swap(array, index, pivotPos);
         if (index != pivotPos) {
-        	synchronized (this) {swap++;}
+            synchronized (this) {
+                swap++;
+            }
         }
         return index;
     }
@@ -43,13 +50,29 @@ public class QuickSort implements SortAlgorithm {
      */
     public void printArray(Comparable[] array) {
         for (int i = 0; i < array.length - 1; i++) {
-        	System.out.print(array[i] + ", ");
+            System.out.print(array[i] + ", ");
         }
         System.out.print(array[array.length - 1]);
         System.out.println();
     }
 
-    
+    public void quickSort(Comparable[] array, int lowerBorder, int upperBorder) {
+        recursionSteps++;
+        if (lowerBorder < upperBorder) {
+            int index = divide(array, lowerBorder, upperBorder);
+            //printArray(array);
+            quickSort(array, lowerBorder, index - 1);
+            quickSort(array, index + 1, upperBorder);
+
+        }
+    }
+
+    @Override
+    public void sort(Comparable[] array) {
+        this.quickSort(array, 0, array.length - 1);
+
+    }
+
     /**
      * Swaps two elements from two given indices within an array.
      *
@@ -64,24 +87,10 @@ public class QuickSort implements SortAlgorithm {
         array[j] = temp;
     }
 
-    public void quickSort(Comparable[] array, int lowerBorder, int upperBorder) {
-        recursionSteps++;
-        if (lowerBorder < upperBorder) {
-            int index = divide(array, lowerBorder, upperBorder);
-            //printArray(array);
-            quickSort(array, lowerBorder, index - 1);
-            quickSort(array, index + 1, upperBorder);
-
-        }
-    }
-
     public static void main(String[] args) {
-    	System.out.println("Parallel:");
-        Integer[] arrayOfNumbers = new Integer[]{20, 16, 30, 12, 5,80, 45, 1, 48, 75, 46, 78, 95, 125, 100, 99};
-//		int[] arrayOfNumbers = new int[5];
-//		for (int i = 0; i < arrayOfNumbers.length; i++) {
-//			arrayOfNumbers[i] = (int) Math.floor(Math.random() * 100 + 1);
-//		}
+        System.out.println("Parallel:");
+        Integer[] arrayOfNumbers = new Integer[]{20, 16, 30, 12, 5, 80, 45, 1, 48, 75, 46, 78, 95, 125, 100, 99};
+        
         QuickSort mySorter = new QuickSortPar(arrayOfNumbers, 0, arrayOfNumbers.length - 1);
         mySorter.printArray(arrayOfNumbers);
         double startTime = System.currentTimeMillis();
@@ -95,13 +104,9 @@ public class QuickSort implements SortAlgorithm {
         System.out.println("Anzahl der Threads: " + QuickSortPar.numberOfThreads);
         System.out.println("Vergangene Zeit: " + (endTime - startTime));
         System.out.println("");
-        
+
         System.out.println("Sequentiell:");
-        arrayOfNumbers = new Integer[]{20, 16, 30, 12, 5,80, 45, 1, 48, 75, 46, 78, 95, 125, 100, 99};
-//		int[] arrayOfNumbers = new int[5];
-//		for (int i = 0; i < arrayOfNumbers.length; i++) {
-//			arrayOfNumbers[i] = (int) Math.floor(Math.random() * 100 + 1);
-//		}
+        arrayOfNumbers = new Integer[]{20, 16, 30, 12, 5, 80, 45, 1, 48, 75, 46, 78, 95, 125, 100, 99};
         mySorter = new QuickSortSeq();
         mySorter.printArray(arrayOfNumbers);
         startTime = System.currentTimeMillis();
@@ -114,11 +119,5 @@ public class QuickSort implements SortAlgorithm {
         System.out.println("Anzahl der Schlüsselvergleiche: " + compare);
         System.out.println("Vergangene Zeit: " + (endTime - startTime));
     }
-
-	@Override
-	public void sort(Comparable[] array) {
-		this.quickSort(array, 0, array.length - 1);
-		
-	}
 
 }
