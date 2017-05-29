@@ -46,7 +46,7 @@ public class QuickSortPar extends QuickSort implements Runnable {
 
 	@Override
 	public void sort(Comparable[] array) {
-		// TODO Auto-generated method stub
+		quickSort(array, 0, array.length - 1);
 
 	}
 
