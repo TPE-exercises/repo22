@@ -5,7 +5,11 @@ Will jemand mehr Geld als auf dem Konto ist abheben, muss er / sie warten bis ge
 Würde in der BankAccount-Klasse in withdraw wait() nicht aufgerufen werden, dann wäre dieser Thread in einer Endlosschleife und andere Threads kämen nicht mehr zum Zuge. => Deadlock
 Ein Livelock ensteht z.B. dadurch, dass nun zwei Leute, die vomselben Konto abheben wollen, sich gegenseitig Bescheid geben, dass die andere Person es nochmal versuchen soll, wenn man selbst das Geld nicht abheben konnte. Dies ist im Grunde nur eine andere Form einer Endlosschleife.
 => Livelock
-Ein weiteres Problem wäre, wenn zwei Threads abheben wollen und einer einzahlen will, wobei das Abheben vor der Einzahlung scheitert und zudem das Abheben jedes Mal vor dem Einzahlen aufgerufen wird. Das Abheben genießt also höhere Priorität. Das Einzahlen wird vernachlässigt, verhungert. => Starvation
-Jedoch noch kein Wissen über Prioritäten erhalten.
+Ein weiteres Problem wäre, wenn zwei Threads abheben wollen und einer einzahlen will, wobei das Abheben scheitert, wenn es vor der Einzahlung geschieht, und zudem das Abheben jedes Mal vor dem Einzahlen aufgerufen wird. Das Abheben genießt also höhere Priorität. Das Einzahlen wird demnach vernachlässigt, verhungert. => Starvation
+Jedoch noch kein Wissen über Implementierung von Prioritäten erhalten.
+
+Außerdem können Programme langsam laufen, auch wenn Threads eingesetzt werden. 
+=> Performance-Hazard
+Dies könnte durch Vielerlei hervorgerufen werden, z.B. Code-Müll, unnötige Aufrufe und Speicherungen oder falsche Priorisierung von Threads.
 
 Außerdem ist das Testen von Threads schwer, da die Reihenfolge, in der sie aufgerufen werden, volatil und nicht gleich der Reihenfolge im Programmcode ist.
