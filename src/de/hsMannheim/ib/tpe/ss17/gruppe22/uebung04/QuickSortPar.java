@@ -18,6 +18,7 @@ public class QuickSortPar extends QuickSort implements Runnable {
 
 	}
 
+	
 	@Override
 	public void quickSort(Comparable[] array, int lowerBorder, int upperBorder) {
 		synchronized (this) {recursionSteps++;}
@@ -43,7 +44,10 @@ public class QuickSortPar extends QuickSort implements Runnable {
 			}
 		}
 	}
-
+	/**
+	 * Sorts an array using quicksort.
+	 * @param array the array to be sorted
+	 */
 	@Override
 	public void sort(Comparable[] array) {
 		quickSort(array, 0, array.length - 1);
@@ -51,3 +55,4 @@ public class QuickSortPar extends QuickSort implements Runnable {
 	}
 
 }
+
