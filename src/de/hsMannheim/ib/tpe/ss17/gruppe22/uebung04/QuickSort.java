@@ -1,6 +1,6 @@
 package de.hsMannheim.ib.tpe.ss17.gruppe22.uebung04;
 
-public class QuickSort implements SortAlgorithm {
+public abstract class QuickSort implements SortAlgorithm {
 
     public static int swap = 0;
     public static int compare = 0;
@@ -68,10 +68,7 @@ public class QuickSort implements SortAlgorithm {
     }
 
     @Override
-    public void sort(Comparable[] array) {
-        this.quickSort(array, 0, array.length - 1);
-
-    }
+    abstract public void sort(Comparable[] array);
 
     /**
      * Swaps two elements from two given indices within an array.
@@ -86,6 +83,12 @@ public class QuickSort implements SortAlgorithm {
         array[i] = array[j];
         array[j] = temp;
     }
+    
+    public void resetStats(){
+    	recursionSteps = -1;
+    	swap = 0;
+    	compare = 0;
+    }
 
     public static void main(String[] args) {
         System.out.println("Parallel:");
@@ -94,23 +97,25 @@ public class QuickSort implements SortAlgorithm {
         QuickSort mySorter = new QuickSortPar(arrayOfNumbers, 0, arrayOfNumbers.length - 1);
         mySorter.printArray(arrayOfNumbers);
         double startTime = System.currentTimeMillis();
-        mySorter.quickSort(arrayOfNumbers, 0, arrayOfNumbers.length - 1);
+        mySorter.sort(arrayOfNumbers);
         double endTime = System.currentTimeMillis();
         mySorter.printArray(arrayOfNumbers);
 
-        System.out.println("Anzahl der Rekursionsschritte: " + recursionSteps);
+        //System.out.println("Anzahl der Rekursionsschritte: " + recursionSteps);
         System.out.println("Anzahl der Vertauschungen: " + swap);
         System.out.println("Anzahl der Schlüsselvergleiche: " + compare);
         System.out.println("Anzahl der Threads: " + QuickSortPar.numberOfThreads);
         System.out.println("Vergangene Zeit: " + (endTime - startTime));
         System.out.println("");
+        
+        mySorter.resetStats();
 
         System.out.println("Sequentiell:");
         arrayOfNumbers = new Integer[]{20, 16, 30, 12, 5, 80, 45, 1, 48, 75, 46, 78, 95, 125, 100, 99};
         mySorter = new QuickSortSeq();
         mySorter.printArray(arrayOfNumbers);
         startTime = System.currentTimeMillis();
-        mySorter.quickSort(arrayOfNumbers, 0, arrayOfNumbers.length - 1);
+        mySorter.sort(arrayOfNumbers);
         endTime = System.currentTimeMillis();
         mySorter.printArray(arrayOfNumbers);
 
