@@ -55,7 +55,12 @@ public abstract class QuickSort implements SortAlgorithm {
         System.out.print(array[array.length - 1]);
         System.out.println();
     }
-
+/**
+ * 
+ * @param array
+ * @param lowerBorder
+ * @param upperBorder
+ */
     public void quickSort(Comparable[] array, int lowerBorder, int upperBorder) {
         recursionSteps++;
         if (lowerBorder < upperBorder) {
@@ -67,6 +72,9 @@ public abstract class QuickSort implements SortAlgorithm {
         }
     }
 
+    /**
+     * Sorts an array using quick-sort.
+     */
     @Override
     abstract public void sort(Comparable[] array);
 
@@ -83,7 +91,9 @@ public abstract class QuickSort implements SortAlgorithm {
         array[i] = array[j];
         array[j] = temp;
     }
-    
+    /**
+     * resets stats for observation purposes.
+     */
     public void resetStats(){
     	recursionSteps = -1;
     	swap = 0;
