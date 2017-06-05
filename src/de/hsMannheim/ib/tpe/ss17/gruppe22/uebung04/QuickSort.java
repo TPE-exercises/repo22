@@ -7,7 +7,7 @@ public abstract class QuickSort implements SortAlgorithm {
     public static int recursionSteps = -1;
 
     /**
-     * Splits the given range of the array in two parts
+     * TODO: Update Comment Splits the given range of the array in two parts
      *
      * @param array
      * @param lowerBorder
@@ -55,12 +55,15 @@ public abstract class QuickSort implements SortAlgorithm {
         System.out.print(array[array.length - 1]);
         System.out.println();
     }
-/**
- * 
- * @param array
- * @param lowerBorder
- * @param upperBorder
- */
+
+    /**
+     * Applies quick sort on a partial array, thus sorting it.
+     *
+     * @param array the array which contains the array part which shall be
+     * sorted
+     * @param lowerBorder defines the partial array together with upperBorder
+     * @param upperBorder defines the partial array together with lowerBorder
+     */
     public void quickSort(Comparable[] array, int lowerBorder, int upperBorder) {
         recursionSteps++;
         if (lowerBorder < upperBorder) {
@@ -74,6 +77,8 @@ public abstract class QuickSort implements SortAlgorithm {
 
     /**
      * Sorts an array using quick-sort.
+     *
+     * @param array the array to be sorted
      */
     @Override
     abstract public void sort(Comparable[] array);
@@ -91,19 +96,20 @@ public abstract class QuickSort implements SortAlgorithm {
         array[i] = array[j];
         array[j] = temp;
     }
+
     /**
      * resets stats for observation purposes.
      */
-    public void resetStats(){
-    	recursionSteps = -1;
-    	swap = 0;
-    	compare = 0;
+    public void resetStats() {
+        recursionSteps = -1;
+        swap = 0;
+        compare = 0;
     }
 
     public static void main(String[] args) {
         System.out.println("Parallel:");
         Integer[] arrayOfNumbers = new Integer[]{20, 16, 30, 12, 5, 80, 45, 1, 48, 75, 46, 78, 95, 125, 100, 99};
-        
+
         QuickSort mySorter = new QuickSortPar(arrayOfNumbers, 0, arrayOfNumbers.length - 1);
         mySorter.printArray(arrayOfNumbers);
         double startTime = System.currentTimeMillis();
@@ -117,7 +123,7 @@ public abstract class QuickSort implements SortAlgorithm {
         System.out.println("Anzahl der Threads: " + QuickSortPar.numberOfThreads);
         System.out.println("Vergangene Zeit: " + (endTime - startTime));
         System.out.println("");
-        
+
         mySorter.resetStats();
 
         System.out.println("Sequentiell:");
