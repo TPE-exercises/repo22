@@ -18,7 +18,13 @@ public class QuickSortPar extends QuickSort implements Runnable {
 
 	}
 
-	
+	/**
+         * Sorts an array part using the quick sort algorithm aswell as thread to 
+         * sort partial arrays.
+         * @param array the array which contains the part that shall be sorted.
+         * @param lowerBorder defines the array part together with upperBorder.
+         * @param upperBorder defines the array part together with lowerBorder.
+         */
 	@Override
 	public void quickSort(Comparable[] array, int lowerBorder, int upperBorder) {
 		synchronized (this) {recursionSteps++;}
