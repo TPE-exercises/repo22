@@ -36,7 +36,7 @@ public class Ringpuffer {
                     notifyAll();
                 } else {
                     try {
-                        System.out.println("Warte bis Platz zum Ablegen bereit ist.");
+                        System.out.println("Ich warte bis Platz zum Ablegen bereit ist.");
                         wait();
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Ringpuffer.class.getName()).log(Level.SEVERE, null, ex);
@@ -61,7 +61,7 @@ public class Ringpuffer {
                     return ringpuffer.leave();
                 } else {
                     try {
-                        System.out.println("Warte bis sich ein Element im Ringpuffer befindet.");
+                        System.out.println("Ich warte bis sich ein Element im Ringpuffer befindet.");
                         wait();
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Ringpuffer.class.getName()).log(Level.SEVERE, null, ex);
