@@ -99,7 +99,7 @@ public class RingpufferTest {
      * cache.
      */
     @Test
-    public void testConsume() {
+    public void testConsumeA() {
         System.out.println("consume");
         Object o = new Integer(5);
         Object p = new Integer(7);
@@ -115,6 +115,61 @@ public class RingpufferTest {
         malcolm.consume();
         malcolm.consume();
         assertEquals(11, instance.get());
+    }
+
+    /**
+     * Tests whether ConsumerThread and Ringpuffer refer to exactly the same
+     * cache.
+     */
+    @Test
+    public void testConsumeB() {
+        System.out.println("consume");
+        Object o = new Integer(5);
+        Object p = new Integer(7);
+        Object q = new Integer(9);
+        Object r = new Integer(11);
+        Ringpuffer instance = new Ringpuffer(4);
+        instance.put(o);
+        instance.put(p);
+        instance.put(q);
+        instance.put(r);
+        ConsumerThread malcolm = new ConsumerThread(instance);
+        malcolm.consume();
+        assertEquals(7, instance.get());
+        assertEquals(9, instance.get());
+        malcolm.consume();
+
+    }
+
+    @Test
+    public void testProduceA() {
+        System.out.println("produce");
+        Ringpuffer instance = new Ringpuffer(4);
+        ProducerThread louis = new ProducerThread(instance);
+        louis.produce();
+        louis.produce();
+        louis.produce();
+        louis.produce();
+    }
+
+    @Test
+    public void testRun() {
+        System.out.println("run 3 producer, 2 consumer, 1 timer");
+        Ringpuffer instance = new Ringpuffer(7);
+        ConsumerThread malcolm = new ConsumerThread(instance, 5000);
+        ConsumerThread reese = new ConsumerThread(instance, 3500);
+        ConsumerThread dewie = new ConsumerThread(instance);
+        ProducerThread lois = new ProducerThread(instance, 1800);
+        ProducerThread hal = new ProducerThread(instance);
+        TimerThread.setTime(0.5);
+        TimerThread.getInstance().start();
+        malcolm.start();
+        reese.start();
+        dewie.start();
+        lois.start();
+        hal.start();
+        
+        fail();
     }
 
 }
