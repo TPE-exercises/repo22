@@ -56,7 +56,7 @@ public class Ringpuffer {
         while (!elementHasBeenGot) {
             synchronized (this) {
                 if (!ringpuffer.isEmpty()) {
-                    elementHasBeenGot = true;
+                    //elementHasBeenGot = true; //Not needed because of return statement.
                     notifyAll();
                     return ringpuffer.leave();
                 } else {
