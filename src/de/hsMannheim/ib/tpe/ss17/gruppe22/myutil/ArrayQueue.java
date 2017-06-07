@@ -17,6 +17,10 @@ public class ArrayQueue implements Queue {
     public ArrayQueue(int length) {
         this.q = new Object[length];
     }
+    public ArrayQueue(int length, boolean expandability) {
+        this(length);
+        expandable = expandability;
+    }
 
     public int getFront() {
         return this.front;
@@ -163,6 +167,7 @@ public class ArrayQueue implements Queue {
         return this.count == 0;
     }
 
+    @Override
     public boolean isFull() {
         return this.count == this.q.length;
     }
