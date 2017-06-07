@@ -12,9 +12,15 @@ import java.util.logging.Logger;
 public class TimerThread extends Thread {
 
     public static double time;
+    private static TimerThread timer = new TimerThread(time);
 
     private TimerThread(double countTime) {
+        super();
         this.time = countTime;
+    }
+
+    public static TimerThread getInstance() {
+        return timer;
     }
 
     /**
@@ -30,8 +36,10 @@ public class TimerThread extends Thread {
         return (time <= 0);
     }
 
+    @Override
     public void run() {
-
+        countDown();
+//        interrupt();
     }
 
     /**
@@ -49,14 +57,16 @@ public class TimerThread extends Thread {
         /**
          * Counts down in millisecond steps.
          */
-        while (time > 0) {
-            time = time - 1;
-            try {
-                sleep(1);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(TimerThread.class.getName()).log(Level.SEVERE, null, ex);
-            }
+//        while (time > 0) {
+//            time = time - 1;
+        try {
+//            sleep(1);
+            sleep((long) time);
+            time = time - time;
+        } catch (InterruptedException ex) {
+            Logger.getLogger(TimerThread.class.getName()).log(Level.SEVERE, null, ex);
         }
+//        }
 //        synchronized (this) {
 //            notifyAll();
 //        }
