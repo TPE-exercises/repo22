@@ -88,6 +88,7 @@ public class TimerThreadTest {
         boolean result = TimerThread.timeIsOver();
         assertEquals(true, result);
     }
+
     /**
      * Test of timeIsOver method, of class TimerThread.
      */
@@ -99,6 +100,7 @@ public class TimerThreadTest {
         boolean result = TimerThread.timeIsOver();
         assertEquals(true, result);
     }
+
     /**
      * Test of timeIsOver method, of class TimerThread.
      */
@@ -110,8 +112,6 @@ public class TimerThreadTest {
         assertEquals(false, result);
     }
 
-
-
     /**
      * Test of countDown method, of class TimerThread.
      */
@@ -122,16 +122,26 @@ public class TimerThreadTest {
         boolean zeroOrSmaller = (TimerThread.time <= 0);
         assertEquals(true, zeroOrSmaller);
     }
+
     /**
      * Test of countDown method, of class TimerThread.
      */
     @Test
     public void testCountDownB() {
-        TimerThread.setTime(0.125);
+        TimerThread.setTime(0.06);
         System.out.println("countDown");
         TimerThread.countDown();
         boolean zeroOrSmaller = (TimerThread.time <= 0);
         assertEquals(true, zeroOrSmaller);
     }
 
+    /**
+     * Test of run method, of class TimerThread.
+     */
+    @Test
+    public void testRunA() {
+        TimerThread.setTime(0.2);
+        System.out.println("run");
+        TimerThread.getInstance().start();
+    }
 }
