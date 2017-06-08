@@ -1,4 +1,6 @@
-package de.hsMannheim.informatik.tpe.ss17.gruppe23.uebung01;
+/*
+ */
+package de.hsMannheim.ib.tpe.ss17.gruppe23.uebung01;
 
 import static gdi.MakeItSimple.*;
 
