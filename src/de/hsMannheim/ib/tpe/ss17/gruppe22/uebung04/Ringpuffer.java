@@ -8,8 +8,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author Marco
  */
 public class Ringpuffer {
 
@@ -27,9 +25,9 @@ public class Ringpuffer {
     public void put(Object o) {
 
         boolean elementHasBeenPut = false;
+        synchronized (this) {
+            while (!elementHasBeenPut && !TimerThread.timeIsOver()) {
 
-        while (!elementHasBeenPut) {
-            synchronized (this) {
                 if (!ringpuffer.isFull()) {
                     ringpuffer.enter(o);
                     elementHasBeenPut = true;
@@ -46,6 +44,12 @@ public class Ringpuffer {
         }
     }
 
+    public void wakeEverybodyUp() {
+        synchronized (this) {
+            notifyAll();
+        }
+    }
+
     /**
      * Gets the first element in the ring cache.
      *
@@ -53,10 +57,11 @@ public class Ringpuffer {
      */
     public Object get() {
         boolean elementHasBeenGot = false;
-        while (!elementHasBeenGot) {
-            synchronized (this) {
+        synchronized (this) {
+            while (!elementHasBeenGot && !TimerThread.timeIsOver()) {
+
                 if (!ringpuffer.isEmpty()) {
-                    //elementHasBeenGot = true; //Not needed because of return statement.
+                    elementHasBeenGot = true; //Not needed because of return statement.
                     notifyAll();
                     return ringpuffer.leave();
                 } else {
@@ -72,5 +77,24 @@ public class Ringpuffer {
 
         }
         return null;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("run 3 producer, 2 consumer, 1 timer");
+        Ringpuffer instance = new Ringpuffer(7);
+        ConsumerThread malcolm = new ConsumerThread(instance, 5000);
+        ConsumerThread reese = new ConsumerThread(instance, 1600);
+        ConsumerThread dewie = new ConsumerThread(instance);
+        ProducerThread lois = new ProducerThread(instance, 400);
+        ProducerThread hal = new ProducerThread(instance);
+        TimerThread.setTime(1);
+        TimerThread.getInstance().start();
+        malcolm.start();
+        reese.start();
+        dewie.start();
+        lois.start();
+        hal.start();
+        
+        
     }
 }
