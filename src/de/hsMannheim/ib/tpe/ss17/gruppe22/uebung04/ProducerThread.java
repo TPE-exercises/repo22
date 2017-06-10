@@ -2,6 +2,7 @@
  */
 package de.hsMannheim.ib.tpe.ss17.gruppe22.uebung04;
 
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,16 +39,23 @@ public class ProducerThread extends Thread {
             }
 
         }
+        producer.wakeEverybodyUp();
+        System.out.println("Ich, " + this + ", bin fertig.");
     }
 
     /**
      * Tries to get an element from 'Ringpuffer' and prints it on the console.
      */
-    public void produce() {
-        synchronized (this) {
-            Object product = (int) (Math.random() * 200);
-            producer.put(product);
-            System.out.println("Ich, " + this + " füge die Zahl " + product + " ein.");
-        }
+    public synchronized void produce() {
+        Object random = new Random();
+                
+
+        
+        Object product = (int) (Math.random() * 200);
+        producer.put(product);
+        String toBePrinted = "Ich, " + this + ", füge die Zahl " + product + " ein.";
+        System.out.println(toBePrinted);
+        notifyAll();
+        producer.wakeEverybodyUp();
     }
 }
