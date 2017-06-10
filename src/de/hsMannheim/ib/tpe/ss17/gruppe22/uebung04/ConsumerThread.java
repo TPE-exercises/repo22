@@ -37,14 +37,20 @@ public class ConsumerThread extends Thread {
                 Logger.getLogger(ConsumerThread.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        System.out.println("Ich, " + this + ", bin fertig.");
+        consumer.wakeEverybodyUp();
     }
 
     /**
      * Tries to get an element from 'Ringpuffer' and prints it on the console.
      */
-    public void consume() {
-        synchronized (this) {
-            System.out.println("Ich, " + this + " nehme das Element " + consumer.get() + " aus dem Ringpuffer.");
+    public synchronized void consume() {
+        Object temp = consumer.get();
+        if (temp != null) {
+        String toBePrinted = "Ich, " + this + ", nehme das Element " + temp + " aus dem Ringpuffer.";
+        System.out.println(toBePrinted);
         }
+        notifyAll();
+        consumer.wakeEverybodyUp();
     }
 }
