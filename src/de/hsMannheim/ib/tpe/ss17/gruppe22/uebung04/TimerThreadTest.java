@@ -143,5 +143,7 @@ public class TimerThreadTest {
         TimerThread.setTime(0.2);
         System.out.println("run");
         TimerThread.getInstance().start();
+        boolean zeroOrSmaller = (TimerThread.time <= 0);
+        assertEquals(true, zeroOrSmaller);
     }
 }
