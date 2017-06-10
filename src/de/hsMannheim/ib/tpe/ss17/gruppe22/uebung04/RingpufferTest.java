@@ -159,9 +159,9 @@ public class RingpufferTest {
         ConsumerThread malcolm = new ConsumerThread(instance, 5000);
         ConsumerThread reese = new ConsumerThread(instance, 3500);
         ConsumerThread dewie = new ConsumerThread(instance);
-        ProducerThread lois = new ProducerThread(instance, 1800);
+        ProducerThread lois = new ProducerThread(instance, 1);
         ProducerThread hal = new ProducerThread(instance);
-        TimerThread.setTime(0.5);
+        TimerThread.setTime(0.16);
         TimerThread.getInstance().start();
         malcolm.start();
         reese.start();
