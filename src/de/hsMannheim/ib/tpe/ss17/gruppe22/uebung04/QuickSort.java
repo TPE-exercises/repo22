@@ -7,12 +7,13 @@ public abstract class QuickSort implements SortAlgorithm {
     public static int recursionSteps = -1;
 
     /**
-     * TODO: Update Comment Splits the given range of the array in two parts
-     *
-     * @param array
-     * @param lowerBorder
-     * @param upperBorder
-     * @return
+     * Splits the given range of the array in two parts. This is indicated by the pivot-Element.
+     * Also, the sorting is applied here.
+     * 
+     * @param array The array of which a part shall be split and of which elements shall be swapped 
+     * @param lowerBorder the lower border of the array part
+     * @param upperBorder the upper border of the array part
+     * @return final position of pivot
      */
     public int divide(Comparable[] array, int lowerBorder, int upperBorder) {
         int pivotPos = upperBorder;
