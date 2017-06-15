@@ -1,0 +1,8 @@
+"Im B-Baum sollen [...] alle Arten von Objekten [verwaltet werden]."
+Heißt das, dass z.B. sowohl Integer- als auch String-Werte gleichzeitig in
+einem Baum gespeichert werden können?
+Oder dass ein Baum gleichzeitig nur eine Art von Comparabletypen aufnehmen
+kann?
+
+Ich schließe auf zweiteres, da kein Kriterium gegeben ist, mit dem man
+einen Integer-Wert höher stuft als einen String-Wert und umgekehrt.
