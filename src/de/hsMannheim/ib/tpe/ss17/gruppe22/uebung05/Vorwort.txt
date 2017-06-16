@@ -6,3 +6,4 @@ kann?
 
 Ich schließe auf zweiteres, da kein Kriterium gegeben ist, mit dem man
 einen Integer-Wert höher stuft als einen String-Wert und umgekehrt.
+Zudem würde ersteres dem Prinzip der Typsicherheit widersprechen.
