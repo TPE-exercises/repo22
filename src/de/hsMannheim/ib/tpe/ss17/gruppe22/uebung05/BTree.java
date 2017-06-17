@@ -1,7 +1,6 @@
 package de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05;
 
 import de.hsMannheim.ib.tpe.ss17.gruppe22.myutil.ArrayStack;
-import de.hsMannheim.ib.tpe.ss17.gruppe23.uebung01.ADTBTree;
 import static gdi.MakeItSimple.*;
 
 /**
@@ -148,7 +147,7 @@ public class BTree implements ADTBTree {
      */
     @Override
     public boolean contains(Integer o) {
-        return contains((Object) o);
+        return contains((Comparable) o);
     }
 
     /**
@@ -157,11 +156,17 @@ public class BTree implements ADTBTree {
      * @param o Object to search for in the tree.
      * @return Returns if the Object is contained in the tree.
      */
-    public boolean contains(Object o) {
+    public boolean contains(Comparable o) {
         if (o == null) {
             return false;
         }
-
+        if (isEmpty()) {
+            return false;
+        } else if ((root.getValues()[0]).getClass() != o.getClass()) {
+            // The element to be inserted is not type-equal to already existing
+            // elements in the tree.
+            return false;
+        }
         BTreeNode currentNode = root;
 
         while (currentNode != null) {
@@ -226,11 +231,11 @@ public class BTree implements ADTBTree {
      * @return Integer object with the largest value.
      */
     @Override
-    public Integer getMax() {
+    public Comparable getMax() {
         if (root == null) {
             throw new GDIException("No maximum element in the B-Tree.");
         } else {
-            return (Integer) root.getMax();
+            return (Comparable) root.getMax();
         }
     }
 
@@ -240,11 +245,11 @@ public class BTree implements ADTBTree {
      * @return Integer object with the smallest value.
      */
     @Override
-    public Integer getMin() {
+    public Comparable getMin() {
         if (root == null) {
             throw new GDIException("No minimum element in the B-Tree.");
         } else {
-            return (Integer) root.getMin();
+            return (Comparable) root.getMin();
         }
     }
 
@@ -310,9 +315,9 @@ public class BTree implements ADTBTree {
      *
      * @param o the element to be removed.
      */
-    public void removeElement(Object o) {
+    public void removeElement(Comparable o) {
         if (contains(o)) {
-            ArrayStack stack = new ArrayStack(size()*2);
+            ArrayStack stack = new ArrayStack(size() * 2);
             pushElementsToStack(root, stack);
             BTree bTree = new BTree(this.degree);
             while (!stack.isEmpty()) {
