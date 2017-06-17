@@ -313,7 +313,7 @@ public class BTree implements ADTBTree {
      */
     public void removeElement(Object o) {
         if (contains(o)) {
-            ArrayStack stack = new ArrayStack(size());
+            ArrayStack stack = new ArrayStack(size()*2);
             pushElementsToStack(root, stack);
             Object[] arrayOfNewTree = new Object[size()];
             int i = 0;
