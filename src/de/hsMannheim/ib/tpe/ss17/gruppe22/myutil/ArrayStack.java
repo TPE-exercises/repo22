@@ -16,7 +16,7 @@ public class ArrayStack implements Stack {
     Object array[];
 
     public ArrayStack() {
-        this.array = new Object[128];
+        this.array = new Object[32768];
     }
 
     public ArrayStack(int size) {
@@ -74,7 +74,7 @@ public class ArrayStack implements Stack {
             this.array[pointer] = el;
 //            showInformation();
         } catch (OverflowException e) {
-            System.out.println("**" + e + ": Es wird versucht auf einen vollen Stack zu pushen!");
+            System.out.println("**" + e + ": Es wird versucht auf einen vollen Stack zu pushen!**");
 //            showInformation();
         }
     }
@@ -93,8 +93,6 @@ public class ArrayStack implements Stack {
         } catch (UnderflowException e) {
             System.out.println("**" + e + ": Ein leerer Stack kann nicht gepoppt werden!**");
             return null;
-        } finally {
-//            showInformation();
         }
     }
 
