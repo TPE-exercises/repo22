@@ -58,8 +58,7 @@ public class BTree implements ADTBTree {
             root = new BTreeNode(degree);
             root.insert(o);
 
-        }
-        if (root.getValues()[0].getClass() != o.getClass()) {
+        } else if ((root.getValues()[0]).getClass() != o.getClass()) {
             // The element to be inserted is not type-equal to already existing
             // elements in the tree.
             return false;
