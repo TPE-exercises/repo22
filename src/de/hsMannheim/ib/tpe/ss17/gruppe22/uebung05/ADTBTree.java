@@ -38,13 +38,13 @@ public interface ADTBTree {
 	 * Returns the largest element of the B-Tree.
 	 * @return the largest element.
 	 */
-	public Integer getMax();
+	public Comparable getMax();
 	
 	/**
 	 * Returns the smallest element of the B-Tree.
 	 * @return the smallest element.
 	 */
-	public Integer getMin();
+	public Comparable getMin();
 	
 	/**
 	 * Returns true if the B-Tree is empty.
