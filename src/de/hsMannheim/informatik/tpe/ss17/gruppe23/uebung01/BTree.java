@@ -9,8 +9,7 @@ import static gdi.MakeItSimple.*;
  * Gruppe 2-3:
  *
  * @author Max Granzow(1624770)
- * @author Joshua Joost(1626034)
- * Gruppe 2-2:
+ * @author Joshua Joost(1626034) Gruppe 2-2:
  * @author Marco Präg
  * @author Marc Mehrer
  */
@@ -50,7 +49,6 @@ public class BTree implements ADTBTree {
      * @return Returns if the process was successful.
      */
     public boolean insert(Object o) {
-
         if (o == null || contains(o)) {
             return false;
         }
@@ -59,8 +57,13 @@ public class BTree implements ADTBTree {
             // Tree is empty
             root = new BTreeNode(degree);
             root.insert(o);
+
+        }
+        if (root.getValues()[0].getClass() != o.getClass()) {
+            // The element to be inserted is not type-equal to already existing
+            // elements in the tree.
+            return false;
         } else {
-            // Tree is not empty
             BTreeNode newRoot = new BTreeNode(degree);
             insertRecursive(o, root, newRoot);
 
