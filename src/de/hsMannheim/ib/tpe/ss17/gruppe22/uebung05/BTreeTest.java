@@ -11,9 +11,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * @autho Gruppe 2-3
+ *
  * @author Marco
- * @author Marc Mehrer
  */
 public class BTreeTest {
 
@@ -107,6 +106,41 @@ public class BTreeTest {
         assertFalse(tree.contains(null));
     }
 
+        @Test
+    public void containsElementTestWithChars() {
+        assertFalse(tree.contains(null));
+        assertFalse(tree.contains(new Integer(5)));
+        assertFalse(tree.contains('b'));
+
+        tree.insert('f');
+        tree.insert('g');
+        tree.insert('h');
+        tree.insert('i');
+        tree.insert('j');
+        tree.insert('k');
+        tree.insert('q');
+        tree.insert('w');
+        tree.insert('e');
+        tree.insert('a');
+
+        assertTrue(tree.contains('a'));
+        assertTrue(tree.contains('e'));
+        assertTrue(tree.contains('w'));
+        assertTrue(tree.contains('q'));
+        assertTrue(tree.contains('k'));
+        assertTrue(tree.contains('j'));
+        assertTrue(tree.contains('i'));
+        assertTrue(tree.contains('h'));
+        assertTrue(tree.contains('g'));
+        assertTrue(tree.contains('f'));
+
+        assertFalse(tree.contains(new Integer("12")));
+        assertFalse(tree.contains('z'));
+        assertFalse(tree.contains('A'));
+        assertFalse(tree.contains(null));
+        assertTrue(tree.getMax().equals('w'));
+        assertTrue(tree.getMin().equals('a'));
+    }
     @Test
     public void sizeTest() {
         assertEquals(0, tree.size());
@@ -170,6 +204,35 @@ public class BTreeTest {
         assertEquals(3, tree.height());
     }
 
+       @Test
+    public void heightTestWithChars() {
+        assertEquals(0, tree.height());
+        
+        tree.insert('a');
+        assertEquals(1, tree.height());
+
+        tree.insert('b');
+        assertEquals(1, tree.height());
+
+        tree.insert('c');
+        assertEquals(1, tree.height());
+
+        tree.insert('d');
+        assertEquals(1, tree.height());
+
+        tree.insert('e');
+        assertEquals(2, tree.height());
+
+        tree.insert('f');
+        tree.insert('g');
+        tree.insert('h');
+        assertEquals(2, tree.height());
+
+        for (int i = 10; i <= 18; i++) {
+            tree.insert((char) i);
+        }
+        assertEquals(3, tree.height());
+    }
     @Test
     public void insertTest() {
 
@@ -236,7 +299,7 @@ public class BTreeTest {
     @Test
     public void addAllTest() {
         // Degree 3 tree in degree 2 tree
-        de.hsMannheim.ib.tpe.ss17.gruppe23.uebung01.BTree tree1 = new de.hsMannheim.ib.tpe.ss17.gruppe23.uebung01.BTree(2), tree2 = new de.hsMannheim.ib.tpe.ss17.gruppe23.uebung01.BTree(3);
+        de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05.BTree tree1 = new de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05.BTree(2), tree2 = new de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05.BTree(3);
 
         for (int i = -10; i < 10; i++) {
             tree2.insert(new Integer(i));
@@ -254,8 +317,8 @@ public class BTreeTest {
         assertFalse(tree1.contains(new Integer(31)));
 
         // Degree 2 tree in degree 3 tree
-        tree1 = new de.hsMannheim.ib.tpe.ss17.gruppe23.uebung01.BTree(2);
-        tree2 = new de.hsMannheim.ib.tpe.ss17.gruppe23.uebung01.BTree(3);
+        tree1 = new de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05.BTree(2);
+        tree2 = new de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05.BTree(3);
 
         for (int i = -10; i < 10; i++) {
             tree2.insert(new Integer(i));
