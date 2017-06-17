@@ -1,4 +1,6 @@
-package de.hsMannheim.informatik.tpe.ss17.gruppe23.uebung01;
+/*
+ */
+package de.hsMannheim.ib.tpe.ss17.gruppe23.uebung01;
 
 import static gdi.MakeItSimple.*;
 
@@ -6,6 +8,8 @@ import static gdi.MakeItSimple.*;
  * Gruppe 2-3:
  * @author Max Granzow(1624770)
  * @author Joshua Joost(1626034)
+ * @author Marco Präg
+ * @author Marc Mehrer
  */
 public class BTreeConsole {
 	//TODO Die erste Zahl aus einer Datei wird als erstes Element mit eingefügt.
@@ -33,7 +37,8 @@ public class BTreeConsole {
 			"Preorder output.",
 			"Levelorder output.",
 			"Sketch B-Tree.",
-			"Clone deeply."
+			"Clone deeply.",
+                        "Remove an element."
 	};
 
 	private static final String[] waysToCreateANewBTree = {
@@ -412,7 +417,7 @@ public class BTreeConsole {
 				insertIntoBTree(readInt()); break;
 			case 5: 
 				println("Which file do You wish to use?");
-				readline();
+				readLine();
 				String file = readLine();	
 				insertIntoBTree(getValuesFromFile(file)); break;
 			case 6:
@@ -513,8 +518,11 @@ public class BTreeConsole {
 			case 17: bTreeList[currentBTree].sketchElementsOnConsole(); // TODO: move to Tree
 					 // printingElementsLevelordered(bTreeList[currentBTree].toStringLevelorder(), bTreeList[currentBTree].getOrder());
 			case 18: bTreeList[currentBTree].clone(); break; // TODO: clone to what tree?
+                        case 19: System.out.println("Which element shall be removed?");
+                            bTreeList[currentBTree].removeElement(readInt());break;
 			}
 		}
 	}
 }
+
 
