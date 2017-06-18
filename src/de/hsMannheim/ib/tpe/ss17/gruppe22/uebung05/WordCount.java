@@ -4,8 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -124,7 +126,8 @@ public final class WordCount {
     public void listWordsByFrequencyDescending() {
         Enumeration e = hashtable.keys();
         Enumeration f = hashtable.elements();
-
+        Integer maxValue = 0;
+        SortedDictionary<String, Integer> dict = new SortedDictionary<String, Integer>();
         while (e.hasMoreElements()) {
             System.out.println(e.nextElement() + " " + f.nextElement());
         }
