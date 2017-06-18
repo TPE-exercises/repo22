@@ -4,10 +4,14 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -124,13 +128,24 @@ public final class WordCount {
      */
     //TODO: Implement
     public void listWordsByFrequencyDescending() {
+        for (int i = 0; i < hashtable.size(); i++) {
+            sortValue(hashtable);
+        }
         Enumeration e = hashtable.keys();
         Enumeration f = hashtable.elements();
         Integer maxValue = 0;
-        SortedDictionary<String, Integer> dict = new SortedDictionary<String, Integer>();
         while (e.hasMoreElements()) {
             System.out.println(e.nextElement() + " " + f.nextElement());
         }
+    }
+
+    public void sortValue(Hashtable<?, Integer> t) {
+        ArrayList<Map.Entry<?, Integer>> list = new ArrayList(t.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<?, Integer>>() {
+            public int compare(Map.Entry<?, Integer> o1, Map.Entry<?, Integer> o2) {
+                return o1.getValue().compareTo(o2.getValue());
+            }
+        });
     }
 
     public static void main(String[] args) {
