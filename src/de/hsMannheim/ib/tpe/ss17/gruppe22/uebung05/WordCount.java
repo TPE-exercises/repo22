@@ -7,12 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,19 +17,19 @@ public final class WordCount {
 
     Hashtable hashtable;
     BufferedReader bufferedReader;
-    // 4286435 is the length of the Bible.txt, 1178962 is the lenght of shakespeare.txt
+    // 4286435 is the length of the Bible.txt, 1178962 is the length of shakespeare.txt
 
     private Character alphabet[] = new Character[]{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
         'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
         'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'Ä', 'Ö', 'Ü', 'ä', 'ö',
-        'ü'};
+        'ü', 'ß'};
 
     public WordCount(String fileToBeAnalyzed) throws IOException {
         try {
             this.bufferedReader = new BufferedReader(new FileReader(fileToBeAnalyzed));
             this.hashtable = new Hashtable<String, Integer>();
             extractWords();
-            listWordsByFrequencyDescending();
+            listWordsByFrequencyDescending(100);
             closeReader();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(WordCount.class.getName()).log(Level.SEVERE, null, ex);
@@ -61,10 +58,10 @@ public final class WordCount {
     public void extractWords() {
         try {
             // System.out's for observation purposes
-            System.out.println("bufferedReader.ready() " + bufferedReader.ready());
+//            System.out.println("bufferedReader.ready() " + bufferedReader.ready());
             while (bufferedReader.ready()) {
                 String line = bufferedReader.readLine();
-                System.out.println("bufferedReader.readLine()" + line);
+//                System.out.println("bufferedReader.readLine()" + line);
                 if (line != null) {
                     extractWordsFromLine(line);
                 }
@@ -124,22 +121,24 @@ public final class WordCount {
     }
 
     /**
-     * Lists all the words currently saved in the hashtable of WordCount sorted
-     * by frequency, descending.
+     * Lists up to X amount of words currently saved in the hashtable of
+     * WordCount sorted by frequency, descending.
+     *
+     * @param topNumbersShown the amount of elements which shall be shown.
      */
-    //TODO: Implement
-    public void listWordsByFrequencyDescending() {
-        sortValues(hashtable);
-        Enumeration e = hashtable.keys();
-        Enumeration f = hashtable.elements();
-        Integer maxValue = 0;
-//        SortedMap map = new TreeMap(Collections.reverseOrder());
-//        while (e.hasMoreElements()) {
-//            System.out.println(e.nextElement() + " " + f.nextElement());
-//        }
+    public void listWordsByFrequencyDescending(int topNumbersShown) {
+        sortValuesReverse(hashtable, topNumbersShown);
     }
 
-    public void sortValues(Hashtable<?, Integer> t) {
+    /**
+     * Sorts a hashtable by values (using an arraylist), then reverses the
+     * order. Then prints the first X elements (which is specified by the second
+     * parametre) on the console.
+     *
+     * @param t the hashtable which contains the elements which shall be listed.
+     * @param topNumbersShown the amount of elements which shall be shown.
+     */
+    private void sortValuesReverse(Hashtable<?, Integer> t, int topNumbersShown) {
         ArrayList<Map.Entry<?, Integer>> list = new ArrayList(t.entrySet());
         Collections.sort(list, new Comparator<Map.Entry<?, Integer>>() {
             @Override
@@ -147,20 +146,16 @@ public final class WordCount {
                 return o1.getValue().compareTo(o2.getValue());
             }
         });
-//        Comparator cmp = Collections.reverseOrder();
-//        Collections.sort(list, cmp);
+        System.out.println("Schema: <Wort>=<Anzahl seines Vorkommens>");
+        Collections.reverse(list);
         Iterator it;
-        if (list.size() >= 100) {
-            it = list.listIterator(list.size() - 100);
-        } else {
-            it = list.listIterator();
-        }
-        System.out.println();
-        System.out.println("Iterator über der Liste: ");
-        while (it.hasNext()) {
-            
+        it = list.listIterator();
+        while (it.hasNext() && topNumbersShown > 0) {
             System.out.println(it.next());
+            topNumbersShown--;
         }
+
+        System.out.println();
 
     }
 
@@ -168,6 +163,8 @@ public final class WordCount {
         long time = System.currentTimeMillis();
         try {
             WordCount wordcountExample = new WordCount("C:\\Users\\Marco\\Desktop\\Hochschule Mannheim\\TPE\\Übung 5 - Collections\\Bibel.txt");
+            wordcountExample = new WordCount("C:\\Users\\Marco\\Desktop\\Hochschule Mannheim\\TPE\\Übung 5 - Collections\\testfile.txt");
+            wordcountExample = new WordCount("C:\\Users\\Marco\\Desktop\\Hochschule Mannheim\\TPE\\Übung 5 - Collections\\shakespeare.txt");
         } catch (IOException ex) {
             Logger.getLogger(WordCount.class.getName()).log(Level.SEVERE, null, ex);
         }
