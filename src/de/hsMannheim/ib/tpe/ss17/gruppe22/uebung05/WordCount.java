@@ -158,8 +158,8 @@ public final class WordCount {
         System.out.println();
         System.out.println("Iterator über der Liste: ");
         while (it.hasNext()) {
-            Integer temp = (Integer) it.next();
-            System.out.println(temp);
+            
+            System.out.println(it.next());
         }
 
     }
