@@ -5,13 +5,14 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -128,24 +129,39 @@ public final class WordCount {
      */
     //TODO: Implement
     public void listWordsByFrequencyDescending() {
-        for (int i = 0; i < hashtable.size(); i++) {
-            sortValue(hashtable);
-        }
+        sortValues(hashtable);
         Enumeration e = hashtable.keys();
         Enumeration f = hashtable.elements();
         Integer maxValue = 0;
-        while (e.hasMoreElements()) {
-            System.out.println(e.nextElement() + " " + f.nextElement());
-        }
+//        SortedMap map = new TreeMap(Collections.reverseOrder());
+//        while (e.hasMoreElements()) {
+//            System.out.println(e.nextElement() + " " + f.nextElement());
+//        }
     }
 
-    public void sortValue(Hashtable<?, Integer> t) {
+    public void sortValues(Hashtable<?, Integer> t) {
         ArrayList<Map.Entry<?, Integer>> list = new ArrayList(t.entrySet());
         Collections.sort(list, new Comparator<Map.Entry<?, Integer>>() {
+            @Override
             public int compare(Map.Entry<?, Integer> o1, Map.Entry<?, Integer> o2) {
                 return o1.getValue().compareTo(o2.getValue());
             }
         });
+//        Comparator cmp = Collections.reverseOrder();
+//        Collections.sort(list, cmp);
+        Iterator it;
+        if (list.size() >= 100) {
+            it = list.listIterator(list.size() - 100);
+        } else {
+            it = list.listIterator();
+        }
+        System.out.println();
+        System.out.println("Iterator über der Liste: ");
+        while (it.hasNext()) {
+            Integer temp = (Integer) it.next();
+            System.out.println(temp);
+        }
+
     }
 
     public static void main(String[] args) {
