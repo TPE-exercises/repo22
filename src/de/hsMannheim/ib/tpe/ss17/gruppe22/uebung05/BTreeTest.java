@@ -1,6 +1,6 @@
 /*
  */
-package de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05;
+package de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05;
 
 import gdi.MakeItSimple;
 import org.junit.After;
@@ -16,11 +16,11 @@ import static org.junit.Assert.*;
  */
 public class BTreeTest {
 
-    de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05.BTree tree;
+    de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05.BTree tree;
 
     @Before
     public void setUp() throws Exception {
-        tree = new de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05.BTree(2);
+        tree = new de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05.BTree(2);
     }
 
     @Test
@@ -106,7 +106,7 @@ public class BTreeTest {
         assertFalse(tree.contains(null));
     }
 
-        @Test
+    @Test
     public void containsElementTestWithChars() {
         assertFalse(tree.contains(null));
         assertFalse(tree.contains(new Integer(5)));
@@ -141,6 +141,7 @@ public class BTreeTest {
         assertTrue(tree.getMax().equals('w'));
         assertTrue(tree.getMin().equals('a'));
     }
+
     @Test
     public void sizeTest() {
         assertEquals(0, tree.size());
@@ -175,6 +176,76 @@ public class BTreeTest {
     }
 
     @Test
+    public void sizeTestWithStrings() {
+        assertEquals(0, tree.size());
+        Comparable values[] = new String[]{"Oma", "Kokolo", "Luffy", "Hahn", "Stroh", "Dreck", "Erde", "Erde", "Natur", "Klimawandel"};
+        tree.insert(values[0]);
+        assertEquals(1, tree.size());
+
+        tree.insert(values[1]);
+        assertEquals(2, tree.size());
+
+        tree.insert(values[2]);
+        assertEquals(3, tree.size());
+
+        tree.insert(values[3]);
+        assertEquals(4, tree.size());
+
+        tree.insert(values[4]);
+        assertEquals(5, tree.size());
+
+        tree.insert(values[5]);
+        assertEquals(6, tree.size());
+
+        tree.insert(values[6]);
+        assertEquals(7, tree.size());
+
+        tree.insert(values[7]);
+        assertEquals(7, tree.size());
+
+        tree.insert(values[8]);
+        assertEquals(8, tree.size());
+
+        tree.insert(values[9]);
+        assertEquals(9, tree.size());
+    }
+
+    @Test
+    public void sizeTestWithChars() {
+        assertEquals(0, tree.size());
+        char values[] = new char[]{'O', 'K', 'L', 'H', 'S', 'D', 'E', 'N', 'W'};
+        tree.insert(values[0]);
+        assertEquals(1, tree.size());
+
+        tree.insert(values[1]);
+        assertEquals(2, tree.size());
+
+        tree.insert(values[2]);
+        assertEquals(3, tree.size());
+
+        tree.insert(values[3]);
+        assertEquals(4, tree.size());
+
+        tree.insert(values[4]);
+        assertEquals(5, tree.size());
+
+        tree.insert(values[5]);
+        assertEquals(6, tree.size());
+
+        tree.insert(values[6]);
+        assertEquals(7, tree.size());
+
+        tree.insert(values[6]);
+        assertEquals(7, tree.size());
+
+        tree.insert(values[7]);
+        assertEquals(8, tree.size());
+
+        tree.insert(values[8]);
+        assertEquals(9, tree.size());
+    }
+
+    @Test
     public void heightTest() {
         assertEquals(0, tree.height());
 
@@ -204,10 +275,10 @@ public class BTreeTest {
         assertEquals(3, tree.height());
     }
 
-       @Test
+    @Test
     public void heightTestWithChars() {
         assertEquals(0, tree.height());
-        
+
         tree.insert('a');
         assertEquals(1, tree.height());
 
@@ -233,6 +304,7 @@ public class BTreeTest {
         }
         assertEquals(3, tree.height());
     }
+
     @Test
     public void insertTest() {
 
@@ -260,7 +332,7 @@ public class BTreeTest {
     @Test
     public void insertTestWithStrings() {
 
-        tree = new de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05.BTree(2);
+        tree = new de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05.BTree(2);
         Comparable[] stringArray = new Comparable[]{"Hallo", "Zuckerguss", "Banane"};
         assertTrue(tree.insert(stringArray[0]));
         assertTrue(tree.insert(stringArray[1]));
@@ -299,7 +371,7 @@ public class BTreeTest {
     @Test
     public void addAllTest() {
         // Degree 3 tree in degree 2 tree
-        de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05.BTree tree1 = new de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05.BTree(2), tree2 = new de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05.BTree(3);
+        de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05.BTree tree1 = new de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05.BTree(2), tree2 = new de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05.BTree(3);
 
         for (int i = -10; i < 10; i++) {
             tree2.insert(new Integer(i));
@@ -317,8 +389,8 @@ public class BTreeTest {
         assertFalse(tree1.contains(new Integer(31)));
 
         // Degree 2 tree in degree 3 tree
-        tree1 = new de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05.BTree(2);
-        tree2 = new de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05.BTree(3);
+        tree1 = new de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05.BTree(2);
+        tree2 = new de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05.BTree(3);
 
         for (int i = -10; i < 10; i++) {
             tree2.insert(new Integer(i));
@@ -338,7 +410,7 @@ public class BTreeTest {
 
     @Test
     public void cloneTest() {
-        de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05.BTree clone;
+        de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05.BTree clone;
 
         for (int i = -10; i <= 10; i++) {
             tree.insert(new Integer(i));
