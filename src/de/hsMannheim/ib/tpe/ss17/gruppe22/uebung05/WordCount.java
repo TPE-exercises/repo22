@@ -23,7 +23,6 @@ public final class WordCount {
     public WordCount(String fileToBeAnalyzed) throws IOException {
         try {
             this.bufferedReader = new BufferedReader(new FileReader(fileToBeAnalyzed));
-            bufferedReader.read(this.textCharacters);
             this.hashtable = new Hashtable<String, Integer>();
             extractWords();
             listWordsByFrequencyDescending();
@@ -54,7 +53,6 @@ public final class WordCount {
      */
     public void extractWords() {
         try {
-            //System.out.println's are there for obversation purposes
             System.out.println("bufferedReader.ready() " + bufferedReader.ready());
             while (bufferedReader.ready()) {
                 String line = bufferedReader.readLine();
@@ -78,6 +76,55 @@ public final class WordCount {
      * @param line the line of text to be analyzed.
      */
     public void extractWordsFromLine(String line) {
+        int lineLength = line.length();
+        int lineIndex = 0;
+        boolean wordInExamination = true;
+        String nextWord = "";
+        while (lineIndex < lineLength && wordInExamination) {
+
+            int alphabetIndex = 0;
+            boolean charFound = false;
+            // Checks whether the current symbol is a letter from the alphabet.
+            while (alphabetIndex < this.alphabet.length && !charFound) {
+                if (line.charAt(lineIndex) == this.alphabet[alphabetIndex]) {
+                    nextWord += line.charAt(lineIndex);
+                    charFound = true;
+                }
+                alphabetIndex++;
+                // The current symbol is none of the alphabet
+                if (alphabetIndex == this.alphabet.length) {
+                    wordInExamination = false;
+                }
+            }
+
+            if (nextWord.length() != 0 && !wordInExamination) {
+                nextWord = nextWord.toLowerCase();
+                if (this.hashtable.get(nextWord) == null) {
+                    // inserts a word for its first time
+                    this.hashtable.put(nextWord, 1);
+                } else {
+                    // Increases the count of this word being found in the text
+                    Integer number = (Integer) this.hashtable.get(nextWord);
+                    number = number + 1;
+                    this.hashtable.put(nextWord, number);
+                }
+                nextWord = "";
+                wordInExamination = true;
+            }
+            lineIndex++;
+        }
+    }
+
+    /**
+     * Extracts the words from a text line and saves them into the hashtable of
+     * WordCount.
+     *
+     * Here, Words are not case sensitive, they will all be treated as if they
+     * were written with small letters only.
+     *
+     * @param line the line of text to be analyzed.
+     */
+    public void extractWordsFromLineB(String line) {
         int lineLength = line.length();
         int lineIndex = 0;
         boolean wordInExamination = true;
