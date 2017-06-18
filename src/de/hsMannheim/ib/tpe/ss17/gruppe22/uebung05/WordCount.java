@@ -14,8 +14,8 @@ public final class WordCount {
     Hashtable hashtable;
     BufferedReader bufferedReader;
     // 4286435 is the length of the Bible.txt, 1178962 is the lenght of shakespeare.txt
-    char[] textCharacters = new char[4286435];
-    private char alphabet[] = new char[]{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
+
+    private Character alphabet[] = new Character[]{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
         'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
         'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'Ä', 'Ö', 'Ü', 'ä', 'ö',
         'ü'};
@@ -53,6 +53,7 @@ public final class WordCount {
      */
     public void extractWords() {
         try {
+            // System.out's for observation purposes
             System.out.println("bufferedReader.ready() " + bufferedReader.ready());
             while (bufferedReader.ready()) {
                 String line = bufferedReader.readLine();
@@ -86,56 +87,7 @@ public final class WordCount {
             boolean charFound = false;
             // Checks whether the current symbol is a letter from the alphabet.
             while (alphabetIndex < this.alphabet.length && !charFound) {
-                if (line.charAt(lineIndex) == this.alphabet[alphabetIndex]) {
-                    nextWord += line.charAt(lineIndex);
-                    charFound = true;
-                }
-                alphabetIndex++;
-                // The current symbol is none of the alphabet
-                if (alphabetIndex == this.alphabet.length) {
-                    wordInExamination = false;
-                }
-            }
-
-            if (nextWord.length() != 0 && !wordInExamination) {
-                nextWord = nextWord.toLowerCase();
-                if (this.hashtable.get(nextWord) == null) {
-                    // inserts a word for its first time
-                    this.hashtable.put(nextWord, 1);
-                } else {
-                    // Increases the count of this word being found in the text
-                    Integer number = (Integer) this.hashtable.get(nextWord);
-                    number = number + 1;
-                    this.hashtable.put(nextWord, number);
-                }
-                nextWord = "";
-                wordInExamination = true;
-            }
-            lineIndex++;
-        }
-    }
-
-    /**
-     * Extracts the words from a text line and saves them into the hashtable of
-     * WordCount.
-     *
-     * Here, Words are not case sensitive, they will all be treated as if they
-     * were written with small letters only.
-     *
-     * @param line the line of text to be analyzed.
-     */
-    public void extractWordsFromLineB(String line) {
-        int lineLength = line.length();
-        int lineIndex = 0;
-        boolean wordInExamination = true;
-        String nextWord = "";
-        while (lineIndex < lineLength && wordInExamination) {
-
-            int alphabetIndex = 0;
-            boolean charFound = false;
-            // Checks whether the current symbol is a letter from the alphabet.
-            while (alphabetIndex < this.alphabet.length && !charFound) {
-                if (line.charAt(lineIndex) == this.alphabet[alphabetIndex]) {
+                if (alphabet[alphabetIndex].equals(line.charAt(lineIndex))) {
                     nextWord += line.charAt(lineIndex);
                     charFound = true;
                 }
@@ -181,10 +133,7 @@ public final class WordCount {
     public static void main(String[] args) {
         long time = System.currentTimeMillis();
         try {
-            WordCount wordcountExample = new WordCount("C:\\Users\\Marco\\Desktop\\Hochschule Mannheim\\TPE\\Übung 5 - Collections\\testfile.txt");
-//            wordcountExample.extractWords();
-//            wordcountExample.listWordsByFrequencyDescending();
-//            wordcountExample.closeReader();
+            WordCount wordcountExample = new WordCount("C:\\Users\\Marco\\Desktop\\Hochschule Mannheim\\TPE\\Übung 5 - Collections\\Bibel.txt");
         } catch (IOException ex) {
             Logger.getLogger(WordCount.class.getName()).log(Level.SEVERE, null, ex);
         }
