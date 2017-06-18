@@ -1,4 +1,4 @@
-package de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05;
+package de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -85,7 +85,7 @@ public final class WordCount {
         int lineIndex = 0;
         boolean wordInExamination = true;
         String nextWord = "";
-        while (lineIndex < lineLength && wordInExamination) {
+        while (lineIndex < lineLength) {
 
             int alphabetIndex = 0;
             boolean charFound = false;
@@ -97,7 +97,7 @@ public final class WordCount {
                 }
                 alphabetIndex++;
                 // The current symbol is none of the alphabet
-                if (alphabetIndex == this.alphabet.length) {
+                if ((alphabetIndex == this.alphabet.length && !charFound) || lineIndex == lineLength - 1) {
                     wordInExamination = false;
                 }
             }
@@ -114,8 +114,9 @@ public final class WordCount {
                     this.hashtable.put(nextWord, number);
                 }
                 nextWord = "";
-                wordInExamination = true;
+                
             }
+            wordInExamination = true;
             lineIndex++;
         }
     }
@@ -162,9 +163,9 @@ public final class WordCount {
     public static void main(String[] args) {
         long time = System.currentTimeMillis();
         try {
-            WordCount wordcountExample = new WordCount("C:\\Users\\Marco\\Desktop\\Hochschule Mannheim\\TPE\\Übung 5 - Collections\\Bibel.txt");
-            wordcountExample = new WordCount("C:\\Users\\Marco\\Desktop\\Hochschule Mannheim\\TPE\\Übung 5 - Collections\\testfile.txt");
-            wordcountExample = new WordCount("C:\\Users\\Marco\\Desktop\\Hochschule Mannheim\\TPE\\Übung 5 - Collections\\shakespeare.txt");
+            WordCount wordcountExample = new WordCount("Bibel");
+//            wordcountExample = new WordCount("");
+            wordcountExample = new WordCount("Shakespeare");
         } catch (IOException ex) {
             Logger.getLogger(WordCount.class.getName()).log(Level.SEVERE, null, ex);
         }
