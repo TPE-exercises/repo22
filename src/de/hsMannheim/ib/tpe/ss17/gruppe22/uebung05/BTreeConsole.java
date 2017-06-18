@@ -1,4 +1,4 @@
-package de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05;
+package de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05;
 
 import gdi.MakeItSimple;
 import static gdi.MakeItSimple.closeInputFile;
@@ -9,6 +9,9 @@ import static gdi.MakeItSimple.print;
 import static gdi.MakeItSimple.println;
 import static gdi.MakeItSimple.readInt;
 import static gdi.MakeItSimple.readLine;
+
+import java.util.Scanner;
+
 import static gdi.MakeItSimple.*;
 
 /**
@@ -26,7 +29,7 @@ public class BTreeConsole {
 
     private static final char SPACECHARACTER = ' ';
     private static String defaultFilePath = "defaultFile";
-    private static de.hsMannheim.ib.tpe.ss17.gruppe23.uebung01.BTree[] bTreeList = {};
+    private static de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05.BTree[] bTreeList = {};
     private static int currentBTree = 0;
 
     private static final String[] commands = {
@@ -49,7 +52,8 @@ public class BTreeConsole {
         "Levelorder output.",
         "Sketch B-Tree.",
         "Clone deeply.",
-        "Remove an element."
+        "Remove an element.",
+        "Über B-Baum iterieren."
     };
 
     private static final String[] waysToCreateANewBTree = {
@@ -57,8 +61,8 @@ public class BTreeConsole {
         "Inserting a number for the order."
     };
 
-    private static void addTreeInTreeList(de.hsMannheim.ib.tpe.ss17.gruppe23.uebung01.BTree tree) {
-        de.hsMannheim.ib.tpe.ss17.gruppe23.uebung01.BTree[] newBTreeList = new de.hsMannheim.ib.tpe.ss17.gruppe23.uebung01.BTree[bTreeList.length + 1];
+    private static void addTreeInTreeList(de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05.BTree tree) {
+        de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05.BTree[] newBTreeList = new de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05.BTree[bTreeList.length + 1];
         for (int i = 0; i < bTreeList.length; i++) {
             newBTreeList[i] = bTreeList[i];
         }
@@ -125,7 +129,7 @@ public class BTreeConsole {
     }
 
     private static void sitANewBTree(int order, int[] valuesToInsert) {
-        de.hsMannheim.ib.tpe.ss17.gruppe23.uebung01.BTree tree1 = new de.hsMannheim.ib.tpe.ss17.gruppe23.uebung01.BTree(order);
+        de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05.BTree tree1 = new de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05.BTree(order);
         addTreeInTreeList(tree1);
         if (valuesToInsert.length > 0) {
             insertIntoBTree(valuesToInsert);
@@ -518,6 +522,17 @@ public class BTreeConsole {
                     System.out.println("Which element shall be removed?");
                     bTreeList[currentBTree].removeElement(readInt());
                     break;
+                case 20:
+                	BTreeIterator iterator = new BTreeIterator (bTreeList[currentBTree]);
+                	Scanner scanner = new Scanner(System.in);
+                	while (iterator.hasNext()){
+                		System.out.println("Aktuelles Element: " + iterator.next().toString());
+                		System.out.println("Dieses Element löschen? [j/n]");
+                		String answer = scanner.nextLine();
+                		if (answer.equals("j"))
+                			iterator.remove();
+                	}
+                	break;
             }
         }
     }

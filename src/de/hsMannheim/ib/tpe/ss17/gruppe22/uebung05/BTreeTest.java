@@ -1,6 +1,6 @@
 /*
  */
-package de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05;
+package de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05;
 
 import gdi.MakeItSimple;
 import org.junit.After;
@@ -16,11 +16,11 @@ import static org.junit.Assert.*;
  */
 public class BTreeTest {
 
-    de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05.BTree tree;
+    de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05.BTree tree;
 
     @Before
     public void setUp() throws Exception {
-        tree = new de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05.BTree(2);
+        tree = new de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05.BTree(2);
     }
 
     @Test
@@ -260,7 +260,7 @@ public class BTreeTest {
     @Test
     public void insertTestWithStrings() {
 
-        tree = new de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05.BTree(2);
+        tree = new de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05.BTree(2);
         Comparable[] stringArray = new Comparable[]{"Hallo", "Zuckerguss", "Banane"};
         assertTrue(tree.insert(stringArray[0]));
         assertTrue(tree.insert(stringArray[1]));
@@ -299,7 +299,7 @@ public class BTreeTest {
     @Test
     public void addAllTest() {
         // Degree 3 tree in degree 2 tree
-        de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05.BTree tree1 = new de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05.BTree(2), tree2 = new de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05.BTree(3);
+        de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05.BTree tree1 = new de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05.BTree(2), tree2 = new de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05.BTree(3);
 
         for (int i = -10; i < 10; i++) {
             tree2.insert(new Integer(i));
@@ -317,8 +317,8 @@ public class BTreeTest {
         assertFalse(tree1.contains(new Integer(31)));
 
         // Degree 2 tree in degree 3 tree
-        tree1 = new de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05.BTree(2);
-        tree2 = new de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05.BTree(3);
+        tree1 = new de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05.BTree(2);
+        tree2 = new de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05.BTree(3);
 
         for (int i = -10; i < 10; i++) {
             tree2.insert(new Integer(i));
@@ -338,7 +338,7 @@ public class BTreeTest {
 
     @Test
     public void cloneTest() {
-        de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05.BTree clone;
+        de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05.BTree clone;
 
         for (int i = -10; i <= 10; i++) {
             tree.insert(new Integer(i));

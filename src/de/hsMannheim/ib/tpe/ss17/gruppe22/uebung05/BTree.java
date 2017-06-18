@@ -1,4 +1,4 @@
-package de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05;
+package de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05;
 
 import de.hsMannheim.ib.tpe.ss17.gruppe22.myutil.ArrayStack;
 import static gdi.MakeItSimple.*;
@@ -29,6 +29,10 @@ public class BTree implements ADTBTree {
         } else {
             this.degree = degree;
         }
+    }
+    
+    public BTreeNode getRoot(){
+    	return this.root;
     }
 
     /**

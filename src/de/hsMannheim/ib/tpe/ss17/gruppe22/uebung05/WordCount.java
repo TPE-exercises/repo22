@@ -1,4 +1,4 @@
-package de.hsMannheim.ib.tpe.ss17.gruppe23.uebung05;
+package de.hsMannheim.ib.tpe.ss17.gruppe22.uebung05;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
