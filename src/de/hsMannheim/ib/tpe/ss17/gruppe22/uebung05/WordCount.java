@@ -5,11 +5,15 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -57,7 +61,6 @@ public final class WordCount {
      */
     public void extractWords() {
         try {
-            // System.out's for observation purposes
 //            System.out.println("bufferedReader.ready() " + bufferedReader.ready());
             while (bufferedReader.ready()) {
                 String line = bufferedReader.readLine();
@@ -114,7 +117,7 @@ public final class WordCount {
                     this.hashtable.put(nextWord, number);
                 }
                 nextWord = "";
-                
+
             }
             wordInExamination = true;
             lineIndex++;
@@ -140,32 +143,88 @@ public final class WordCount {
      * @param topNumbersShown the amount of elements which shall be shown.
      */
     private void sortValuesReverse(Hashtable<?, Integer> t, int topNumbersShown) {
-        ArrayList<Map.Entry<?, Integer>> list = new ArrayList(t.entrySet());
-        Collections.sort(list, new Comparator<Map.Entry<?, Integer>>() {
-            @Override
-            public int compare(Map.Entry<?, Integer> o1, Map.Entry<?, Integer> o2) {
-                return o1.getValue().compareTo(o2.getValue());
-            }
-        });
-        System.out.println("Schema: <Wort>=<Anzahl seines Vorkommens>");
-        Collections.reverse(list);
-        Iterator it;
-        it = list.listIterator();
-        while (it.hasNext() && topNumbersShown > 0) {
+        // Previously used code
+//        SortedSet<KeyValuePair> sortedSet = new TreeSet<KeyValuePair>();
+//        ArrayList<Map.Entry<?, Integer>> list = new ArrayList(t.entrySet());
+//        Collections.sort(list, new Comparator<Map.Entry<?, Integer>>() {
+//            @Override
+//            public int compare(Map.Entry<?, Integer> o1, Map.Entry<?, Integer> o2) {
+//                return o1.getValue().compareTo(o2.getValue());
+//            }
+//        });
+//        System.out.println("Schema: <Wort>=<Anzahl seines Vorkommens>");
+//        Collections.reverse(list);
+//        Iterator it;
+//        it = list.listIterator();
+//        while (it.hasNext() && topNumbersShown > 0) {
+//            System.out.println(it.next());
+//            topNumbersShown--;
+//        }
+        SortedSet<KeyValuePair> sortedSet = new TreeSet<KeyValuePair>();
+        Enumeration values = hashtable.elements();
+        Enumeration keys = hashtable.keys();
+        while (values.hasMoreElements() && keys.hasMoreElements()) {
+            sortedSet.add(new KeyValuePair((String) keys.nextElement(), (Integer) values.nextElement()));
+        }
+        Iterator it = sortedSet.iterator();
+        int i = 0;
+        while (it.hasNext() && i < topNumbersShown) {
             System.out.println(it.next());
             topNumbersShown--;
         }
-
         System.out.println();
-
     }
 
-    public static void main(String[] args) {
+    private static class KeyValuePair implements Comparable<KeyValuePair> {
+
+        String key;
+        Integer value;
+
+        public KeyValuePair(String key, Integer value) {
+            super();
+            this.key = key;
+            this.value = value;
+        }
+
+        /**
+         * This method was specially designed for WordCount. The Integer value
+         * has highest priority, thus is compared first. Pairs shall also be
+         * sorted descending by values, thus returning 1 if a Pair has a smaller
+         * value than another one, respectively -1 if it has a greater value 
+         * than another one.
+         * As normally, pairs shall be sorted ascending by key value.
+         * @param o the Pair to be made a comparison with.
+         * @return The answer to whether to rank this pair higher, as of 1, or
+         * lower, as of -1, than the one compared with.
+         */
+        @Override
+        public int compareTo(KeyValuePair o) {
+            if (this.value.compareTo(o.value) < 0) {
+                return 1;
+            } else if (this.value.compareTo(o.value) > 0) {
+                return -1;
+            } else { // values are equal
+                if (this.key.compareToIgnoreCase(o.key) < 0) {
+                    return -1;
+                } else if (this.key.compareToIgnoreCase(o.key) > 0) {
+                    return 1;
+                } else { // keys are equal, too
+                    return 0;
+                }
+            }
+        }
+
+        @Override
+        public String toString() {
+            return this.key + "=" + this.value;
+        }
+    }
+        public static void main(String[] args) {
         long time = System.currentTimeMillis();
         try {
-            WordCount wordcountExample = new WordCount("Bibel");
-//            wordcountExample = new WordCount("");
-            wordcountExample = new WordCount("Shakespeare");
+            WordCount wordcountExample = new WordCount("C:\\Users\\Marco\\Desktop\\Hochschule Mannheim\\TPE\\Übung 5 - Collections\\Bibel.txt");
+            wordcountExample = new WordCount("C:\\Users\\Marco\\Desktop\\Hochschule Mannheim\\TPE\\Übung 5 - Collections\\testfile.txt");
+            wordcountExample = new WordCount("C:\\Users\\Marco\\Desktop\\Hochschule Mannheim\\TPE\\Übung 5 - Collections\\shakespeare.txt");
         } catch (IOException ex) {
             Logger.getLogger(WordCount.class.getName()).log(Level.SEVERE, null, ex);
         }
